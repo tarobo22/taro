@@ -1,0 +1,593 @@
+{
+  "repository": "taro",
+  "code_head": "beee61fa169423eaebf30b01e5d53bf5a7631c48",
+  "base": "origin/main",
+  "branch": "codex/complete-core-flows-20261106",
+  "changes": [
+    {
+      "status": "M",
+      "paths": [
+        "App.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "android/app/build.gradle"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "android/app/src/main/java/com/yeoun/app/MainApplication.kt"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "android/app/src/main/java/com/yeoun/app/YeounFilesModule.kt"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "android/app/src/main/java/com/yeoun/app/YeounFilesPackage.kt"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "docs/architecture/p0-flows.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "docs/contracts/openapi.json"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "docs/quality/completion.md"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "metro.config.js"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "package-lock.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "package.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/components/SelectionDial.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/components/UI.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/components/VoiceButton.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/composition.ts"
+      ]
+    },
+    {
+      "status": "R093",
+      "paths": [
+        "src/config/runtime.json",
+        "src/config/endpoints.json"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/config/runtime.native.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/domain/content.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/dashboard/DashboardLoader.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/experience/ExperienceApi.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/experience/motion.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/experience/submit.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/experience/useSubmit.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/journal/JournalApi.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/journal/JournalDraftSession.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/journal/model.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/journal/saveJournal.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/journal/useJournalDraft.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/journal/useJournalLatest.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/features/journal/useJournalSave.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/JobObserver.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/P0Api.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/PageLoader.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/PreferencesWriter.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/applyReviewedTranscript.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/eraseCurrentDeviceData.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/jobFailure.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/model.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/persistence.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/selection.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/useP0.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/p0/useP0Pages.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/updates/GovernedUpdates.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/features/updates/UpdateManager.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/infrastructure/http/FetchClient.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/infrastructure/http/GuestSession.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/infrastructure/requestId.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/infrastructure/storage/JournalDraftStore.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/infrastructure/storage/JournalRetryStore.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/infrastructure/storage/OperationReceipts.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/navigation.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/screens/Journal.tsx"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/screens/P0.tsx"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/screens/P0Tarot.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/screens/Settings.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/screens/Talk.tsx"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/screens/Tarot.tsx"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/services/fileTypes.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "src/services/files.native.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/services/secure.native.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/services/updates.native.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "src/state/store.tsx"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/dashboard.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/experience-restart.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/journal-editor.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/journal-retry.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-context-pages.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-contract.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-erasure.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-feedback-motion.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-journal-source.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-lifecycle.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-preferences.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-transcript.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/p0-update-policy.test.ts"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "tests/updates.test.ts"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "tools/doctor.mjs"
+      ]
+    },
+    {
+      "status": "M",
+      "paths": [
+        "README.md"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "docs/quality/p0-completion.md"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "docs/quality/p0-verification.json"
+      ]
+    },
+    {
+      "status": "A",
+      "paths": [
+        "docs/quality/p0-changes.json"
+      ]
+    }
+  ],
+  "feature_commits": [
+    {
+      "sha": "20421cc52eba6845639aa08f807f74e71d082946",
+      "subject": "feat(journal): persist create identities across uncertain retries and form remounts"
+    },
+    {
+      "sha": "c1c505b77f8f1a8b04ee7d43b26d92ff30086118",
+      "subject": "feat(data): keep successful sections usable when a history request fails"
+    },
+    {
+      "sha": "fe7f12a9f98b678eefe796ff6be1b275ede8e2eb",
+      "subject": "feat(journal): preserve versioned drafts across restore and save races"
+    },
+    {
+      "sha": "14f0b9db3bb379011033ce30b9a5f5e1acf794e0",
+      "subject": "feat(updates): guard download and apply lifecycle and surface native recovery"
+    },
+    {
+      "sha": "1a00e04bdc70c6b736817a2ab4199861a9af77b2",
+      "subject": "fix(runtime): avoid Metro resolving JSON before the platform configuration provider"
+    },
+    {
+      "sha": "ef7a840b83c21b623a62cefd70c73e33063bc0b8",
+      "subject": "feat(journal): resolve stale edits explicitly while keeping the local draft"
+    },
+    {
+      "sha": "c05002d67df62a70892958cc28be8959ff5a4fd0",
+      "subject": "feat(counsel): persist retry identities and restore follow-up drafts across reloads"
+    },
+    {
+      "sha": "23b79e4cab6a614f807cb8f4cc854296f7a37504",
+      "subject": "fix(journal): keep empty saved entries separate from new-entry drafts"
+    },
+    {
+      "sha": "edeed839e2dea0ab494947632f53c5376872b044",
+      "subject": "feat(p0): connect consented async flows and remaining core screens"
+    },
+    {
+      "sha": "c83d14ec987da8c7f007aafd8dc7cfd14df7c314",
+      "subject": "fix(p0): erase device drafts and invalidate revoked session state"
+    },
+    {
+      "sha": "0d4e958999514053ae5fc64234473eb2ad44bf25",
+      "subject": "feat(android): choose cloud audio and save private export files"
+    },
+    {
+      "sha": "06ed542bc9e6fcc39263f1635b24bd8f261fc88e",
+      "subject": "fix(privacy): authenticate export status before private download"
+    },
+    {
+      "sha": "a485f43935560c89092fba34f7a4702f62b9eb60",
+      "subject": "chore(release): align native file capability baseline at 1.2.0"
+    },
+    {
+      "sha": "cc9087028aeb2938eafd79b6e964743467025755",
+      "subject": "feat(journal): retain reading and turn sources through durable edits"
+    },
+    {
+      "sha": "1d36d80029880220b610f6c84d02cea07ddda679",
+      "subject": "feat(history): confirm deletion and respect closed conversations"
+    },
+    {
+      "sha": "3920b2d1acfeaa366b53f81f386f92ebbb7880f5",
+      "subject": "feat(settings): persist server preferences and restore acknowledged choices"
+    },
+    {
+      "sha": "c5b05aeb98370397737653c5caedb7a92e961d0d",
+      "subject": "fix(motion): retain scroll position when changing reduced motion"
+    },
+    {
+      "sha": "d8a62d5b3cd192dfb90ecaeb788c921fa9c7167d",
+      "subject": "fix(accessibility): retain action labels during pending work"
+    },
+    {
+      "sha": "28fb938033facb466a87c454aa1c64a52c4b7324",
+      "subject": "feat(records): review context versions and page filtered histories"
+    },
+    {
+      "sha": "e0db3f79ac07e0b0faf44c764566a57130ea06e6",
+      "subject": "feat(updates): enforce server policy before checking and applying bundles"
+    },
+    {
+      "sha": "803d65637c7ca94dbd52ef597d266652bb9be530",
+      "subject": "fix(ui): bound profile motion and explain job recovery actions"
+    },
+    {
+      "sha": "e6d429ff81bfdb2c4dc3fa053555b606ab4927c3",
+      "subject": "fix(motion): detach animated opacity when reduced motion is enabled"
+    },
+    {
+      "sha": "e9692e5b69a5eb60bc6f3d0772f3cb6bb80154f9",
+      "subject": "fix(motion): complete zero-duration native transitions without hiding content"
+    },
+    {
+      "sha": "beee61fa169423eaebf30b01e5d53bf5a7631c48",
+      "subject": "fix(privacy): explain explicitly selected journal context accurately"
+    }
+  ]
+}

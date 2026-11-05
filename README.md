@@ -53,7 +53,11 @@ npx hot-updater db migrate ota/updater.ts --yes
 npm run ota:server
 # 에뮬레이터 대상 포트 연결 후, 호환되는 네이티브 기준 빌드에서 사용
 adb reverse tcp:8806 tcp:8806
-npx hot-updater deploy --platform android --target-app-version 1.1.0 --channel preview --message "검증한 화면 업데이트"
+npx hot-updater deploy --platform android --target-app-version 1.2.0 --channel preview --message "검증한 화면 업데이트"
 ```
 
-새 효과 모듈이 추가돼 Android 기준 버전은 1.1.0이다. 네이티브 모듈·권한 변경에는 새 앱 빌드가 필요하다.
+파일 선택·비공개 ZIP 저장 모듈을 포함한 Android 기준 버전은 1.2.0이다. 네이티브 모듈·권한 변경에는 새 앱 빌드가 필요하다.
+
+## P0 구현 완료 기록
+
+[기능·TDD·검증 결과와 남은 범위](docs/quality/p0-completion.md)를 확인할 수 있다.
