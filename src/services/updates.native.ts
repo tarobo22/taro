@@ -1,6 +1,7 @@
 import {HotUpdater} from '@hot-updater/react-native';
 import {runtime} from '../config/runtime';
-import {UpdateManager} from '../features/updates/UpdateManager';
+import {GovernedUpdates} from '../features/updates/GovernedUpdates';
+import type {OtaPolicy} from '../features/p0/model';
 
 let notice='';
 const listeners=new Set<()=>void>();
@@ -13,13 +14,14 @@ export const hotUpdater=HotUpdater.init({baseURL:runtime.otaBaseUrl,requestTimeo
     listeners.forEach(listener=>listener());
   },
 });
-const updates=new UpdateManager({
-  async check(){
-    const update=await hotUpdater.checkForUpdate({updateStrategy:'appVersion',channel:runtime.otaChannel});
+const updates=new GovernedUpdates({
+  async check(channel){
+    const update=await hotUpdater.checkForUpdate({updateStrategy:'appVersion',channel});
     return update?{download:()=>update.updateBundle()}:null;
   },
   async reload(){await hotUpdater.reload();},
-});
+},()=>hotUpdater.getAppVersion());
+export function configureUpdatePolicy(policy:OtaPolicy|null){const ready=updates.ready;updates.configure(policy);if(ready&&!updates.ready)notice='업데이트 정책이 바뀌었어요. 다시 확인해 주세요.';listeners.forEach(listener=>listener());}
 export const checkAndDownload=()=>updates.checkAndDownload();
 export const applyUpdate=()=>updates.apply();
 export const isUpdateReady=()=>updates.ready;
