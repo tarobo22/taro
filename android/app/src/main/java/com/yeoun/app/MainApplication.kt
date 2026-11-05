@@ -18,6 +18,7 @@ class MainApplication : Application(), ReactApplication {
           // Packages that cannot be autolinked yet can be added manually here, for example:
           add(YeounSpeechPackage())
           add(YeounFeedbackPackage())
+          add(YeounFilesPackage())
         },
       jsBundleFilePath = if (BuildConfig.DEBUG) null else HotUpdater.getJSBundleFile(applicationContext),
     )
