@@ -1,6 +1,7 @@
 {
   "apiBaseUrl": "http://10.0.2.2:8808",
   "otaBaseUrl": "http://127.0.0.1:8806/hot-updater",
+  "otaChannel": "preview",
   "timeoutMs": 30000,
   "paths": {
     "session": "/v1/session",
