@@ -1,0 +1,51 @@
+{
+  "name": "taro-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "typecheck": "tsc --noEmit",
+    "ota:server": "tsx ota/server.ts",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "doctor": "node tools/doctor.mjs",
+    "android:release": "react-native run-android --mode release"
+  },
+  "dependencies": {
+    "@hot-updater/react-native": "1.1.7",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "react": "19.2.3",
+    "react-native": "0.85.3",
+    "react-native-keychain": "^10.0.0",
+    "react-native-safe-area-context": "5.7.0",
+    "react-native-svg": "15.15.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/runtime": "^7.28.0",
+    "@hono/node-server": "^1.19.0",
+    "@hot-updater/bare": "1.1.7",
+    "@hot-updater/plugin-core": "1.1.7",
+    "@hot-updater/protocol": "1.1.7",
+    "@hot-updater/server": "1.1.7",
+    "@hot-updater/standalone": "1.1.7",
+    "@react-native-community/cli": "20.2.0",
+    "@react-native-community/cli-platform-android": "20.2.0",
+    "@react-native-community/cli-platform-ios": "20.2.0",
+    "@react-native/babel-preset": "0.85.3",
+    "@react-native/metro-config": "0.85.3",
+    "@react-native/typescript-config": "0.85.3",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.23.1",
+    "@types/react": "^19.2.3",
+    "hono": "^4.10.0",
+    "hot-updater": "1.1.7",
+    "kysely": "^0.28.8",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.3",
+    "pg": "^8.23.1"
+  },
+  "engines": {
+    "node": ">=24.22.2"
+  }
+}

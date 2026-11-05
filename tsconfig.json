@@ -1,0 +1,1 @@
+{"extends":"@react-native/typescript-config","compilerOptions":{"strict":true,"noEmit":true,"types":["react","node"],"moduleResolution":"bundler","moduleSuffixes":[".native",""]},"include":["App.tsx","src/**/*.ts","src/**/*.tsx"],"exclude":["node_modules","android","ota"]}
