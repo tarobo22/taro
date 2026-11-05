@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">여운</string>
+    <string name="reminder_channel">마음을 돌아볼 시간</string>
+    <string name="reminder_channel_description">직접 켠 하루 한 번의 마음기록 알림</string>
+    <string name="reminder_body">오늘의 마음에 작은 여운을 남겨 볼까요?</string>
 </resources>
