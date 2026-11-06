@@ -30,7 +30,7 @@ class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactC
     context.addLifecycleEventListener(this)
     pool.setOnLoadCompleteListener { _, id, status -> if (status == 0) synchronized(ready) { ready.add(id) } }
     mapOf("tap" to R.raw.yeoun_tap, "select" to R.raw.yeoun_select, "confirm" to R.raw.yeoun_confirm,
-      "back" to R.raw.yeoun_back, "tick" to R.raw.yeoun_back, "shuffle" to R.raw.yeoun_shuffle,
+      "boundary" to R.raw.yeoun_back, "back" to R.raw.yeoun_back, "tick" to R.raw.yeoun_back, "shuffle" to R.raw.yeoun_shuffle,
       "flip" to R.raw.yeoun_flip).forEach { (name, resource) -> sounds[name] = pool.load(context, resource, 1) }
   }
   override fun getName() = "YeounFeedback"
@@ -59,7 +59,8 @@ class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactC
     if (soundEnabled && id != null && synchronized(ready) { ready.contains(id) }) {
       synchronized(streams) {
         if (!captureMuted && foreground) {
-          val stream = pool.play(id, 0.55f, 0.55f, 1, 0, 1f)
+          val gain = if (kind == "tick") 0.18f else if (kind == "boundary") 0.22f else 0.45f
+          val stream = pool.play(id, gain, gain, 1, 0, 1f)
           if (stream != 0) streams.add(stream)
           while (streams.size > 3) { val old = streams.first(); pool.stop(old); streams.remove(old) }
         }
@@ -67,7 +68,13 @@ class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactC
     }
     if (hapticsEnabled) UiThreadUtil.runOnUiThread {
       if (captureMuted || !foreground || !hapticsEnabled) return@runOnUiThread
-      val pattern = if (kind == "confirm" && Build.VERSION.SDK_INT >= 30) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.CLOCK_TICK
+      val pattern = when {
+        kind == "confirm" && Build.VERSION.SDK_INT >= 30 -> HapticFeedbackConstants.CONFIRM
+        kind == "tick" && Build.VERSION.SDK_INT >= 34 -> HapticFeedbackConstants.SEGMENT_FREQUENT_TICK
+        kind == "select" && Build.VERSION.SDK_INT >= 34 -> HapticFeedbackConstants.SEGMENT_TICK
+        kind == "boundary" -> HapticFeedbackConstants.CLOCK_TICK
+        else -> HapticFeedbackConstants.CONTEXT_CLICK
+      }
       context.currentActivity?.window?.decorView?.performHapticFeedback(pattern)
     }
   }

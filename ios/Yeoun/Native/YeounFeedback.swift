@@ -4,6 +4,8 @@ import UIKit
 
 @objc(YeounFeedback)
 final class YeounFeedback: NSObject {
+    private let selectionFeedback = UISelectionFeedbackGenerator()
+    private let impactFeedback = UIImpactFeedbackGenerator(style: .soft)
     private var sound = false
     private var haptics = true
     private var musicEnabled = false
@@ -40,11 +42,11 @@ final class YeounFeedback: NSObject {
     @objc func play(_ kind: String) {
         guard !captureMuted, UIApplication.shared.applicationState == .active else { return }
         if haptics {
-            if kind == "select" || kind == "tick" { UISelectionFeedbackGenerator().selectionChanged() }
+            if kind == "select" || kind == "tick" { selectionFeedback.selectionChanged(); selectionFeedback.prepare() }
             else if kind == "confirm" { UINotificationFeedbackGenerator().notificationOccurred(.success) }
-            else { UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.4) }
+            else { impactFeedback.impactOccurred(intensity: kind == "boundary" ? 0.25 : 0.4); impactFeedback.prepare() }
         }
-        let names = ["tap": "soft_tap", "select": "soft_select", "confirm": "soft_confirm", "back": "light_tap", "tick": "light_tap", "shuffle": "card_shuffle", "flip": "card_flip"]
+        let names = ["tap": "soft_tap", "select": "soft_select", "confirm": "soft_confirm", "back": "light_tap", "tick": "light_tap", "boundary": "light_tap", "shuffle": "card_shuffle", "flip": "card_flip"]
         guard sound, let name = names[kind], let url = Bundle.main.url(forResource: name, withExtension: "wav", subdirectory: "Sounds") else { return }
         do {
             try AVAudioSession.sharedInstance().setCategory(.ambient, options: [.mixWithOthers])
@@ -52,7 +54,7 @@ final class YeounFeedback: NSObject {
             effects.removeAll(where: { !$0.isPlaying })
             if effects.count >= 3 { effects.removeFirst().stop() }
             let player = try AVAudioPlayer(contentsOf: url)
-            player.volume = 0.55
+            player.volume = kind == "tick" ? 0.18 : 0.45
             effects.append(player)
             player.play()
         } catch { /* A missing output device never blocks the selected action. */ }
