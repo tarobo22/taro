@@ -1,0 +1,59 @@
+Applications Memory Usage (in Kilobytes):
+Uptime: 3750460 Realtime: 3750460
+
+** MEMINFO in pid 4396 [com.yeoun.app.nonai14] **
+                   Pss  Private  Private     Swap      Rss     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty    Total     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    30057    29956        0        0    33976    49952    41230     4073
+  Dalvik Heap     6368     6164        0        0    13796    11563     5782     5781
+ Dalvik Other     3253     2828        0        0     4420
+        Stack      908      908        0        0      912
+       Ashmem      252      220        0        0      948
+    Other dev       22        0       20        0      284
+     .so mmap     3944      184      216        0    46604
+    .jar mmap     1617        0        0        0    36456
+    .apk mmap    29094      864    23232        0    37068
+    .ttf mmap      196        0        0        0      968
+    .dex mmap    13811        8    13656        0    14892
+    .oat mmap      730        0        0        0    13136
+    .art mmap     1491      668        0        0    29520
+   Other mmap     3889        4     3044        0     6656
+      Unknown     8163     8156        0        0     8976
+        TOTAL   103795    49960    40168        0   248612    61515    47012     9854
+
+ App Summary
+                       Pss(KB)                        Rss(KB)
+                        ------                         ------
+           Java Heap:     6832                          43316
+         Native Heap:    29956                          33976
+                Code:    38160                         149940
+               Stack:      908                            912
+            Graphics:        0                              0
+       Private Other:    14272
+              System:    13667
+             Unknown:                                   20468
+
+           TOTAL PSS:   103795            TOTAL RSS:   248612      TOTAL SWAP (KB):        0
+
+ Objects
+               Views:       90         ViewRootImpl:        1
+         AppContexts:        5           Activities:        1
+              Assets:       26        AssetManagers:        0
+       Local Binders:       18        Proxy Binders:       59
+       Parcel memory:        8         Parcel count:       34
+    Death Recipients:        0             WebViews:        0
+
+ SQL
+         MEMORY_USED:      163
+  PAGECACHE_OVERFLOW:       41          MALLOC_SIZE:       46
+
+ DATABASES
+      pgsz     dbsz   Lookaside(b) cache hits cache misses cache size  Dbname
+PER CONNECTION STATS
+         4       20             55    11    24     4  /data/user/0/com.yeoun.app.nonai14/databases/RKStorage
+         4       56             32     1    21     2  /data/user/0/com.yeoun.app.nonai14/databases/com.google.android.datatransport.events
+POOL STATS
+     cache hits  cache misses    cache size  Dbname
+             11            25            36  /data/user/0/com.yeoun.app.nonai14/databases/RKStorage
+              1            22            23  /data/user/0/com.yeoun.app.nonai14/databases/com.google.android.datatransport.events

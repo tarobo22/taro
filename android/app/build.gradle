@@ -82,8 +82,8 @@ android {
         applicationId providers.gradleProperty("yeounApplicationId").orElse("com.yeoun.app").get()
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "1.3.0"
+        versionCode 5
+        versionName "1.4.0"
     }
     signingConfigs {
         debug {
@@ -108,6 +108,7 @@ android {
 }
 
 dependencies {
+    implementation("com.android.billingclient:billing:9.1.0")
     testImplementation("junit:junit:4.13.2")
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")

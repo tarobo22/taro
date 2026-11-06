@@ -1,0 +1,123 @@
+{
+  "status": "final_local_preview_artifact_verified_not_applied",
+  "source_commit": "d8576628bce18f4d5c38d45b4813b80c44b55ca9",
+  "source_hash_count": 144,
+  "source_before_after_changed": [],
+  "node": "v24.22.2",
+  "node_executable": "C:\\Users\\chang\\.cache\\yeoun-tools\\node-v24.22.2-win-x64\\node.exe",
+  "app_version": "1.4.0",
+  "native_version_code": 5,
+  "channel": "preview",
+  "platform": "android",
+  "public_bundle_id": "01a1b049-aa7a-7820-8160-923800a5fe5b",
+  "artifact_id": "01a1b047-c5aa-7512-a9c5-4b25bbe6ca67",
+  "release_revision": 1,
+  "manifest_sha256": "8247b6d4e2a6077d650aca3a3c948bf0270c8c49ff83c8f8dfbb808a0670463c",
+  "archive_sha256": "92c48929ed710b699069e7879abc503d00efa36a1c189dd9fb0c1da21a0c01a5",
+  "archive_bytes": 16843784,
+  "verified_assets": 81,
+  "archive_and_storage_verified": true,
+  "db_manifest_hash_matches": true,
+  "should_force_update": false,
+  "rollout_percent": 100,
+  "enabled": true,
+  "retained": [
+    {
+      "directory": "bundle",
+      "artifact_id": "01a1b02c-5b38-7b93-b0c0-90d5336194c3",
+      "manifest_sha256": "3bdb2e29dd277024238484af02f75d20dcfbf0969d711ace4022a2d38655a47d",
+      "archive_sha256": "d1ee3e176e8c5ff4ed6b77cf17e4161b5ae33fb589b99f4543cfd9a6b9431cb8",
+      "archive_bytes": 16843186
+    },
+    {
+      "directory": "bundle-final",
+      "artifact_id": "01a1b032-c076-78ef-a8c0-e1a01d5b937b",
+      "manifest_sha256": "7083f77df7e403b4288fe30f70df726aa006ae7d10821db6c31ed6085acacfcd",
+      "archive_sha256": "6e0e79a89bd56861b1d7f6b8463dc63323693107982a50b5f9ca22ac29560b39",
+      "archive_bytes": 16842160
+    },
+    {
+      "directory": "bundle-final3",
+      "artifact_id": "01a1b047-c5aa-7512-a9c5-4b25bbe6ca67",
+      "manifest_sha256": "8247b6d4e2a6077d650aca3a3c948bf0270c8c49ff83c8f8dfbb808a0670463c",
+      "archive_sha256": "92c48929ed710b699069e7879abc503d00efa36a1c189dd9fb0c1da21a0c01a5",
+      "archive_bytes": 16843784
+    }
+  ],
+  "policies": [
+    {
+      "id": "01a1b02d-b2ff-79b1-bfc2-2d35667483c3",
+      "revision": 2,
+      "enabled": false,
+      "bundle_id": "01a1b02c-5b38-7b93-b0c0-90d5336194c3",
+      "strategy": "APP_VERSION",
+      "target_app_version": "1.4.0",
+      "platform": "android",
+      "channel": "preview",
+      "should_force_update": false,
+      "rollout_cohort_count": 1000
+    },
+    {
+      "id": "01a1b033-e784-7c2a-9855-15478c7f65d6",
+      "revision": 2,
+      "enabled": false,
+      "bundle_id": "01a1b032-c076-78ef-a8c0-e1a01d5b937b",
+      "strategy": "APP_VERSION",
+      "target_app_version": "1.4.0",
+      "platform": "android",
+      "channel": "preview",
+      "should_force_update": false,
+      "rollout_cohort_count": 1000
+    },
+    {
+      "id": "01a1b049-aa7a-7820-8160-923800a5fe5b",
+      "revision": 1,
+      "enabled": true,
+      "bundle_id": "01a1b047-c5aa-7512-a9c5-4b25bbe6ca67",
+      "strategy": "APP_VERSION",
+      "target_app_version": "1.4.0",
+      "platform": "android",
+      "channel": "preview",
+      "should_force_update": false,
+      "rollout_cohort_count": 1000
+    }
+  ],
+  "patch_paths_verified": 1,
+  "partial_update_runtime_application_tested": false,
+  "server_started": false,
+  "server_start_retried": false,
+  "device_download_or_apply": false,
+  "external_service_or_store_deployments": 0,
+  "ai_or_voice_requests": 0,
+  "actual_secrets_or_existing_env_files_accessed": false,
+  "direct_app_source_edits_by_agent": 0,
+  "cli_tracked_side_effect": {
+    "file": ".gitignore",
+    "lines": [
+      "# hot-updater",
+      ".hot-updater/output"
+    ],
+    "parent_handled": true
+  },
+  "generated_repo_output": "taro/dist; no longer needed by this verification; parent may move after absolute-path validation",
+  "compatibility_document": "native-compatibility.md",
+  "native_inventory": "native-package-inventory-final3.json",
+  "server_policy_rejection": "server-start-policy-rejection.txt",
+  "fixture_verifier_correction": "fixture-script-correction.json",
+  "initial_third_guard": {
+    "aborted_before_bundle": true,
+    "reason": "Parent committed the same approved Home/SelectionDial changes; reconciled and parent confirmed d8576628"
+  },
+  "evidence": [
+    "deploy-final3.log",
+    "third-policy.json",
+    "third-verification.json",
+    "third-source-before.json",
+    "third-source-after.json",
+    "final-policies.json",
+    "retained-bundles-final.json",
+    "patches-final3.json",
+    "first-disable.json",
+    "second-disable.json"
+  ]
+}
