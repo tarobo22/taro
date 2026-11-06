@@ -18,28 +18,42 @@ class YeounSpeechPackage : ReactPackage {
 
 class YeounSpeechModule(private val context: ReactApplicationContext) : ReactContextBaseJavaModule(context) {
   private var recognizer: SpeechRecognizer? = null
+  private var epoch = 0
   override fun getName() = "YeounSpeech"
-  private fun emit(text: String = "", message: String = "", final: Boolean = false, error: Boolean = false) {
-    if (context.hasActiveReactInstance()) context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit("YeounSpeech", Arguments.createMap().apply { putString("text", text); putString("message", message); putBoolean("final", final); putBoolean("error", error) })
+  private fun emit(text: String = "", message: String = "", final: Boolean = false, error: Boolean = false, captureId: String? = null) {
+    if (context.hasActiveReactInstance()) context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java).emit("YeounSpeech", Arguments.createMap().apply { putString("text", text); putString("message", message); putBoolean("final", final); putBoolean("error", error); if (captureId != null) putString("captureId", captureId) })
   }
   @ReactMethod fun isAvailable(promise: Promise) {
     UiThreadUtil.runOnUiThread { promise.resolve(SpeechRecognizer.isRecognitionAvailable(context)) }
   }
-  @ReactMethod fun start(language: String) {
+  @ReactMethod fun start(language: String) { startInternal(language, null) }
+  @ReactMethod fun startCapture(language: String, captureId: String) { startInternal(language, captureId) }
+  private fun destroyRecognizer() {
+    epoch++
+    val old = recognizer
+    recognizer = null
+    old?.cancel()
+    old?.destroy()
+  }
+  private fun startInternal(language: String, captureId: String?) {
     UiThreadUtil.runOnUiThread {
-      recognizer?.destroy()
-      if (!SpeechRecognizer.isRecognitionAvailable(context)) { emit(message = "이 기기에서 음성 인식을 사용할 수 없어요. 텍스트로 입력해 주세요.", error = true); return@runOnUiThread }
+      destroyRecognizer()
+      val listeningEpoch = epoch
+      fun send(text: String = "", message: String = "", final: Boolean = false, error: Boolean = false) {
+        if (epoch == listeningEpoch) emit(text, message, final, error, captureId)
+      }
+      if (!SpeechRecognizer.isRecognitionAvailable(context)) { send(message = "이 기기에서 음성 인식을 사용할 수 없어요. 텍스트로 입력해 주세요.", error = true); return@runOnUiThread }
       try {
         recognizer = if (Build.VERSION.SDK_INT >= 31 && SpeechRecognizer.isOnDeviceRecognitionAvailable(context)) SpeechRecognizer.createOnDeviceSpeechRecognizer(context) else SpeechRecognizer.createSpeechRecognizer(context)
         recognizer?.setRecognitionListener(object : RecognitionListener {
-          override fun onReadyForSpeech(params: Bundle?) { emit(message = "듣고 있어요. 천천히 말해 주세요.") }
+          override fun onReadyForSpeech(params: Bundle?) { send(message = "듣고 있어요. 천천히 말해 주세요.") }
           override fun onBeginningOfSpeech() {}
           override fun onRmsChanged(rmsdB: Float) {}
           override fun onBufferReceived(buffer: ByteArray?) {}
           override fun onEndOfSpeech() {}
-          override fun onError(code: Int) { emit(message = if (code == SpeechRecognizer.ERROR_NO_MATCH || code == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) "음성을 인식하지 못했어요. 다시 누르거나 직접 입력해 주세요." else "음성 인식을 마쳤어요. 입력 내용을 확인해 주세요. (오류 $code)", error = true) }
-          override fun onResults(results: Bundle?) { emit(text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull() ?: "", message = "입력 내용을 확인한 뒤 보내 주세요.", final = true) }
-          override fun onPartialResults(results: Bundle?) { emit(text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull() ?: "", message = "듣고 있어요.") }
+          override fun onError(code: Int) { send(message = if (code == SpeechRecognizer.ERROR_NO_MATCH || code == SpeechRecognizer.ERROR_SPEECH_TIMEOUT) "음성을 인식하지 못했어요. 다시 누르거나 직접 입력해 주세요." else "음성 인식을 마쳤어요. 입력 내용을 확인해 주세요. (오류 $code)", error = true) }
+          override fun onResults(results: Bundle?) { send(text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull() ?: "", message = "입력 내용을 확인한 뒤 보내 주세요.", final = true) }
+          override fun onPartialResults(results: Bundle?) { send(text = results?.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)?.firstOrNull() ?: "", message = "듣고 있어요.") }
           override fun onEvent(eventType: Int, params: Bundle?) {}
         })
         recognizer?.startListening(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
@@ -49,11 +63,11 @@ class YeounSpeechModule(private val context: ReactApplicationContext) : ReactCon
           putExtra(RecognizerIntent.EXTRA_PREFER_OFFLINE, true)
           putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 1)
         })
-      } catch (error: Exception) { emit(message = "음성 입력을 시작하지 못했어요. 권한과 기기의 음성 인식 설정을 확인해 주세요.", error = true) }
+      } catch (error: Exception) { send(message = "음성 입력을 시작하지 못했어요. 권한과 기기의 음성 인식 설정을 확인해 주세요.", error = true) }
     }
   }
-  @ReactMethod fun stop() { UiThreadUtil.runOnUiThread { recognizer?.cancel(); recognizer?.destroy(); recognizer = null } }
+  @ReactMethod fun stop() { UiThreadUtil.runOnUiThread { destroyRecognizer() } }
   @ReactMethod fun addListener(eventName: String) {}
   @ReactMethod fun removeListeners(count: Int) {}
-  override fun invalidate() { UiThreadUtil.runOnUiThread { recognizer?.destroy(); recognizer = null }; super.invalidate() }
+  override fun invalidate() { UiThreadUtil.runOnUiThread { destroyRecognizer() }; super.invalidate() }
 }

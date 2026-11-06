@@ -15,10 +15,13 @@ class YeounFeedbackPackage : ReactPackage {
 }
 
 class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactContextBaseJavaModule(context), LifecycleEventListener {
-  private var soundEnabled = true
+  private var soundEnabled = false
   private var hapticsEnabled = true
   private var musicEnabled = false
+  @Volatile private var captureMuted = false
+  @Volatile private var foreground = true
   private var music: MediaPlayer? = null
+  private val streams = linkedSetOf<Int>()
   private val pool = SoundPool.Builder().setMaxStreams(3).setAudioAttributes(AudioAttributes.Builder()
     .setUsage(AudioAttributes.USAGE_ASSISTANCE_SONIFICATION).setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build()).build()
   private val ready = mutableSetOf<Int>()
@@ -33,24 +36,43 @@ class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactC
   override fun getName() = "YeounFeedback"
   @ReactMethod fun configure(sound: Boolean, haptics: Boolean, background: Boolean) {
     soundEnabled = sound; hapticsEnabled = haptics; musicEnabled = background
+    if (!sound) stopEffects()
     UiThreadUtil.runOnUiThread { updateMusic() }
   }
+  @ReactMethod fun setCaptureMuted(muted: Boolean) {
+    captureMuted = muted
+    if (muted) stopEffects()
+    UiThreadUtil.runOnUiThread { updateMusic() }
+  }
+  private fun stopEffects() {
+    synchronized(streams) { streams.forEach { pool.stop(it) }; streams.clear() }
+  }
   private fun updateMusic() {
-    if (!musicEnabled) { music?.pause(); return }
+    if (!musicEnabled || captureMuted || !foreground) { music?.pause(); return }
     if (context.currentActivity?.hasWindowFocus() != true) return
     if (music == null) music = MediaPlayer.create(context, R.raw.yeoun_music)?.apply { isLooping = true; setVolume(0.08f, 0.08f) }
     music?.start()
   }
   @ReactMethod fun play(kind: String) {
+    if (captureMuted || !foreground) return
     val id = sounds[kind]
-    if (soundEnabled && id != null && synchronized(ready) { ready.contains(id) }) pool.play(id, 0.55f, 0.55f, 1, 0, 1f)
+    if (soundEnabled && id != null && synchronized(ready) { ready.contains(id) }) {
+      synchronized(streams) {
+        if (!captureMuted && foreground) {
+          val stream = pool.play(id, 0.55f, 0.55f, 1, 0, 1f)
+          if (stream != 0) streams.add(stream)
+          while (streams.size > 3) { val old = streams.first(); pool.stop(old); streams.remove(old) }
+        }
+      }
+    }
     if (hapticsEnabled) UiThreadUtil.runOnUiThread {
+      if (captureMuted || !foreground || !hapticsEnabled) return@runOnUiThread
       val pattern = if (kind == "confirm" && Build.VERSION.SDK_INT >= 30) HapticFeedbackConstants.CONFIRM else HapticFeedbackConstants.CLOCK_TICK
       context.currentActivity?.window?.decorView?.performHapticFeedback(pattern)
     }
   }
-  override fun onHostResume() { updateMusic() }
-  override fun onHostPause() { music?.pause() }
-  override fun onHostDestroy() { music?.pause() }
+  override fun onHostResume() { foreground = true; updateMusic() }
+  override fun onHostPause() { foreground = false; stopEffects(); music?.pause() }
+  override fun onHostDestroy() { foreground = false; stopEffects(); music?.pause() }
   override fun invalidate() { context.removeLifecycleEventListener(this); music?.release(); music = null; pool.release(); super.invalidate() }
 }
