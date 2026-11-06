@@ -91,13 +91,15 @@ class YeounBillingModule(private val context: ReactApplicationContext) : ReactCo
 
   @ReactMethod fun purchase(id: String, kind: String, accountId: String, offerToken: String, promise: Promise) {
     if (pendingPurchase != null) { promise.reject("PURCHASE_BUSY", "진행 중인 구매를 먼저 확인해 주세요."); return }
-    if (!validKind(kind) || !accountId.matches(Regex("[0-9a-f]{64}"))) {
+    if (!validKind(kind) || !id.matches(Regex("[A-Za-z0-9._-]{1,150}")) || !accountId.matches(Regex("[0-9a-f]{64}"))) {
       promise.reject("INVALID_PURCHASE", "계정과 상품을 확인해 주세요."); return
     }
     pendingPurchase = promise
     handler.postDelayed(purchaseTimeout, 120_000)
     connected(promise) {
+      if (pendingPurchase !== promise) return@connected
       query(id, kind) { result, detail ->
+        if (pendingPurchase !== promise) return@query
         if (result.responseCode != BillingClient.BillingResponseCode.OK || detail == null) {
           finishError("STORE_UNAVAILABLE", "상품을 다시 확인해 주세요."); return@query
         }
@@ -109,6 +111,7 @@ class YeounBillingModule(private val context: ReactApplicationContext) : ReactCo
         if (activity == null) { finishError("NO_ACTIVITY", "앱으로 돌아와 다시 시도해 주세요."); return@query }
         val item = BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(detail).setOfferToken(offerToken).build()
         activity.runOnUiThread {
+          if (pendingPurchase !== promise) return@runOnUiThread
           val launched = client.launchBillingFlow(activity, BillingFlowParams.newBuilder().setProductDetailsParamsList(listOf(item))
             .setObfuscatedAccountId(accountId).build())
           if (launched.responseCode != BillingClient.BillingResponseCode.OK) {
