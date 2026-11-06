@@ -1,0 +1,112 @@
+✖ double tap creates one session and one message while the first request is pending (1.2269ms)
+✖ manual retry preserves the original request and keeps text edited after an uncertain response (0.2414ms)
+✖ switching owner discards the old response and private drafts (0.1807ms)
+✖ card confirmation is sent only after the server enters confirmation phase (0.2158ms)
+✖ refreshing a failed server job never silently submits another paid operation (0.1998ms)
+✖ voice review text takes precedence over an older navigation draft (0.185ms)
+✖ an uncertain session creation reuses its creation key on the next explicit send (0.1745ms)
+✖ deleting the current conversation clears its navigation draft and displayed result (0.1656ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 0
+ℹ fail 8
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 281.8838
+
+✖ failing tests:
+
+test at tests\counseling-controller.test.ts:2:2764
+✖ double tap creates one session and one message while the first request is pending (1.2269ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:30:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests\counseling-controller.test.ts:2:3490
+✖ manual retry preserves the original request and keeps text edited after an uncertain response (0.2414ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:41:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests\counseling-controller.test.ts:2:4366
+✖ switching owner discards the old response and private drafts (0.1807ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:51:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\counseling-controller.test.ts:2:4962
+✖ card confirmation is sent only after the server enters confirmation phase (0.2158ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:59:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\counseling-controller.test.ts:2:5578
+✖ refreshing a failed server job never silently submits another paid operation (0.1998ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:68:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\counseling-controller.test.ts:2:6153
+✖ voice review text takes precedence over an older navigation draft (0.185ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:75:80)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\counseling-controller.test.ts:2:6691
+✖ an uncertain session creation reuses its creation key on the next explicit send (0.1745ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:84:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\counseling-controller.test.ts:2:7202
+✖ deleting the current conversation clears its navigation draft and displayed result (0.1656ms)
+  Error: F02 initialize
+      at CounselingController.initialize (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\src\features\counseling\CounselingController.ts:15:41)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-counseling-tdd-20261107\mobile\tests\counseling-controller.test.ts:90:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
