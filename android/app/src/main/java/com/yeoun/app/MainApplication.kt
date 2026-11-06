@@ -20,6 +20,7 @@ class MainApplication : Application(), ReactApplication {
           add(YeounFeedbackPackage())
           add(YeounFilesPackage())
           add(YeounRemindersPackage())
+          add(YeounAuthPackage())
         },
       jsBundleFilePath = if (BuildConfig.DEBUG) null else HotUpdater.getJSBundleFile(applicationContext),
     )
