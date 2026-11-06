@@ -1,0 +1,257 @@
+[
+  {
+    "id": "00-introduction",
+    "seconds": 53.6,
+    "video_seconds": 53.6,
+    "audio_seconds": 53.6,
+    "av_difference_ms": 0.0,
+    "width": 1280,
+    "height": 720,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1123,
+    "chapters_inspected": 5,
+    "bytes": 2265842,
+    "sha256": "1ce77d163b03853491107b3063483fae9c5861eb3ca159c111157248909b6e93"
+  },
+  {
+    "id": "01-product-plan-v1",
+    "seconds": 43.433,
+    "video_seconds": 43.433,
+    "audio_seconds": 43.433,
+    "av_difference_ms": 0.0,
+    "width": 1280,
+    "height": 720,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1135,
+    "chapters_inspected": 4,
+    "bytes": 1941876,
+    "sha256": "7dbfe393a8dc0065c5a01046c4edd201c61e5a8fb5d4c01d1cc5438faa2a2cd2"
+  },
+  {
+    "id": "02-development-plan-v1",
+    "seconds": 47.1,
+    "video_seconds": 47.1,
+    "audio_seconds": 47.1,
+    "av_difference_ms": 0.0,
+    "width": 1280,
+    "height": 720,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1203,
+    "chapters_inspected": 4,
+    "bytes": 1810168,
+    "sha256": "51149bc4290ee0254e7274f8077c2efa97c8af698bfec3a28cbe539ed87e893e"
+  },
+  {
+    "id": "03-design-improvement-v2",
+    "seconds": 47.533,
+    "video_seconds": 47.533,
+    "audio_seconds": 47.533,
+    "av_difference_ms": 0.0,
+    "width": 1280,
+    "height": 720,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1226,
+    "chapters_inspected": 4,
+    "bytes": 1890930,
+    "sha256": "97a5253497b597295f5a6a6859ea1fb2a3cb5684a95d221df49547cbced30de3"
+  },
+  {
+    "id": "04-code-changes-v2",
+    "seconds": 52.633,
+    "video_seconds": 52.633,
+    "audio_seconds": 52.633,
+    "av_difference_ms": 0.0,
+    "width": 1280,
+    "height": 720,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1256,
+    "chapters_inspected": 4,
+    "bytes": 2091586,
+    "sha256": "60b6d14cb912dd6b1fc482b27ae4f7e4b05880a37010759d4cb07a0e882e0783"
+  },
+  {
+    "id": "05-complete-user-guide",
+    "seconds": 281.733,
+    "video_seconds": 281.733,
+    "audio_seconds": 281.733,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1183,
+    "chapters_inspected": 8,
+    "bytes": 15899428,
+    "sha256": "2a85b2d00f2a8d4835837a8450239fd82fdc27ea822dcd3d071a84e2c807c052"
+  },
+  {
+    "id": "06-ai-integration-v3-plan",
+    "seconds": 67.333,
+    "video_seconds": 67.333,
+    "audio_seconds": 67.333,
+    "av_difference_ms": 0.0,
+    "width": 1280,
+    "height": 720,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1162,
+    "chapters_inspected": 5,
+    "bytes": 2957595,
+    "sha256": "19a5bff7df66cf3b74af1e330d074d036fc1f3034cdd115be5dc83b6fd14b6f5"
+  },
+  {
+    "id": "u01-start",
+    "seconds": 30.8,
+    "video_seconds": 30.8,
+    "audio_seconds": 30.8,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1184,
+    "chapters_inspected": 3,
+    "bytes": 1568250,
+    "sha256": "f05538d38a2d1e16152714d12df6021a6fe222c4ac0fa329b7f7975f5ac2f9b2"
+  },
+  {
+    "id": "u02-daily",
+    "seconds": 30.0,
+    "video_seconds": 30.0,
+    "audio_seconds": 30.0,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1235,
+    "chapters_inspected": 3,
+    "bytes": 1649518,
+    "sha256": "af095b18f686e661f2d6f69aaf5b4ad8677eefa9e8a9e532dd74522b4e7c51cd"
+  },
+  {
+    "id": "u03-tarot",
+    "seconds": 42.9,
+    "video_seconds": 42.9,
+    "audio_seconds": 42.9,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1194,
+    "chapters_inspected": 4,
+    "bytes": 2455784,
+    "sha256": "74cf99ef5fa6541be18917a6a56653fedfe9de05374ded5eccd8d01ba2e09ec0"
+  },
+  {
+    "id": "u04-talk",
+    "seconds": 46.6,
+    "video_seconds": 46.6,
+    "audio_seconds": 46.6,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1189,
+    "chapters_inspected": 4,
+    "bytes": 2259284,
+    "sha256": "a88ca8ce4bef4bc73cb9fc6fca68dffc8d351a2bb4c7823d2f05d8343af82004"
+  },
+  {
+    "id": "u05-journal",
+    "seconds": 40.833,
+    "video_seconds": 40.833,
+    "audio_seconds": 40.833,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1182,
+    "chapters_inspected": 4,
+    "bytes": 2119190,
+    "sha256": "a4ae6ed50bbd2c463653d19a40938b33e344692ec00f9c1522e5436c7140dc16"
+  },
+  {
+    "id": "u06-story",
+    "seconds": 28.867,
+    "video_seconds": 28.867,
+    "audio_seconds": 28.867,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.104,
+    "chapters_inspected": 3,
+    "bytes": 1558900,
+    "sha256": "1413f570777a6bb8ecd70f29ee62e1e7cb9fdb901e357a7a1de0f93d66582faf"
+  },
+  {
+    "id": "u07-settings",
+    "seconds": 30.733,
+    "video_seconds": 30.733,
+    "audio_seconds": 30.733,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.109,
+    "chapters_inspected": 3,
+    "bytes": 1506822,
+    "sha256": "b60bc0929f4dda5d103dd522aea7b45ea9fdfc7809548c47bf88afb3c93dd662"
+  },
+  {
+    "id": "u08-recovery",
+    "seconds": 31.0,
+    "video_seconds": 31.0,
+    "audio_seconds": 31.0,
+    "av_difference_ms": 0.0,
+    "width": 720,
+    "height": 1280,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "audio_rms_first6s": 0.1077,
+    "chapters_inspected": 3,
+    "bytes": 1680240,
+    "sha256": "c38c552531bcae124f0002e758d4deddca8b694d7a6fd06b13573df058ebb2a4"
+  }
+]
