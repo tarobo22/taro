@@ -1,0 +1,98 @@
+{
+  "new_design_tests": 0,
+  "existing_test_changes": {
+    "taro": [],
+    "taro-raect": []
+  },
+  "preserved_existing_unfinished_files": [
+    {
+      "repo": "taro",
+      "path": "tests/app-store-billing.test.ts",
+      "sha256": "3f6eac444a75b8c5bd48bc69a8151056743a96a7b4561076234be0b8a806e3e9",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/adapters/billing_postgres.py",
+      "sha256": "525c07925612a60c533ceeb403a6eab75d34afe325811206113267282fae89e2",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/main.py",
+      "sha256": "5634de58a43f562dd1b35ae15aa694270506107f687c0031f22761c34cb1a646",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/requirements.txt",
+      "sha256": "f01224b6c63ba0806ba2beb88a6bc9f66c849a91e7d98d6c376b85b9fa2dbaa2",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "docs/contracts/openapi.json",
+      "sha256": "7743e13981be3af28e48349b7d907a6fb34f7018133f37bf1a60e68f36af551a",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/adapters/app_store_billing.py",
+      "sha256": "c88ecda412a5da019738ec39ede44797f151dd6213e7fc857977289e57168ae2",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/adapters/app_store_runtime.py",
+      "sha256": "8067e9f5dab849fc33194b8be8da818fa739ef59638ab287d3cac09a6c892f9e",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/adapters/http/app_store.py",
+      "sha256": "e98b8115eae44721982db38bf1b733271d9a773ae2952359ae736fff310e25ab",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/application/app_store.py",
+      "sha256": "e5becedb9caa30bbc5519304b7f9df7ab79f09fb04a5aa3e71c02e378f5b7180",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/migrations/0026_billing_store_partition.sql",
+      "sha256": "08abe7a6f1a21877e0d3c1c5c9487033e5d82e8e8d86a14b4707d77abe39bf22",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/tests/integration/test_app_store_checkout.py",
+      "sha256": "9f90337d7cd24e0107acdddc84e5788eb06ca62c9a18ca81f73a7727c03eec84",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "api/tests/unit/test_app_store_verification.py",
+      "sha256": "13e48fce956b54cb48bf2b788e685abdbf06d73d7fe0ad3280733856567f47f8",
+      "unchanged": true
+    },
+    {
+      "repo": "taro-back",
+      "path": "shared/app-store-catalog.json",
+      "sha256": "efc873f175c26a8ff085811d389171525ef7ce7fe1a45748bf2dfdf48d1bc8c4",
+      "unchanged": true
+    }
+  ],
+  "backend_changed_by_this_task": false,
+  "local_full_test_suite_run": false,
+  "local_checks": [
+    "RN tsc --noEmit",
+    "Web tsc --noEmit",
+    "Web vite build",
+    "Android release build",
+    "actual browser flow recording",
+    "actual emulator interaction"
+  ],
+  "web_runtime_errors": []
+}

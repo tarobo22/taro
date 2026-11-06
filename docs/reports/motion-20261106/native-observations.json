@@ -1,0 +1,27 @@
+{
+  "package": "com.yeoun.app.motion15",
+  "version": "1.5.0",
+  "build": 6,
+  "device": "emulator-5554",
+  "api": 35,
+  "physical_haptics_measured": false,
+  "apk_sha256": "2ee561a218a6103effcb1250617f0204b9468e0d018425a50b7685bb1ad28fdb",
+  "metrics": {
+    "hwui_frames": 1740,
+    "janky_frames": 35,
+    "janky_percent": 2.01,
+    "hwui_p95_ms": 36,
+    "pss_mib": 331.4,
+    "elapsed_seconds": 30.47
+  },
+  "performance_summary": "Android: API35·1080×2400·density420·font1.0, 약30.5초 탐색·셔플·대화·대기 포함. HWUI 1740frames, jank 2.01%, p95 36ms, PSS 331.4MiB. HWUI 통계는 Skia 별도 렌더 루프의 모든 표시 프레임이나 JS FPS·실기기 성능을 대변하지 않는다.",
+  "runtime_error_log": "",
+  "observed_actions": [
+    "native rotary gesture",
+    "previous/next",
+    "card selection lift",
+    "server shuffle",
+    "cancelled profile swipe",
+    "accepted swipe to next question"
+  ]
+}

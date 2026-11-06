@@ -1,0 +1,114 @@
+[
+  {
+    "path": "App.tsx",
+    "sha256": "f7b00d781f388500aef8dc96d0582282feed397ae470667267c55d3f583236c1"
+  },
+  {
+    "path": "android/app/build.gradle",
+    "sha256": "6b41396d839ffa217454dcf8f44c24b7764bd30eb97608efb02a65635c39f045"
+  },
+  {
+    "path": "android/app/src/main/java/com/yeoun/app/YeounFeedbackModule.kt",
+    "sha256": "833f93c702d77a40d09f4b00e4096dde8ac6aaef0494048a1adeeb90f27131e3"
+  },
+  {
+    "path": "babel.config.js",
+    "sha256": "c84a642304a246af60743e18d287c00ef7634835489c3934125c44ce88fd44b7"
+  },
+  {
+    "path": "index.js",
+    "sha256": "d866ff185625ed13345a737cfb50877f94366483009f3068aee90b9f48c0d156"
+  },
+  {
+    "path": "ios/Yeoun.xcodeproj/project.pbxproj",
+    "sha256": "7c8dfd3d073103b2c7dffd4d18a9205feb444434513933b1a1acfd8f879587b6"
+  },
+  {
+    "path": "ios/Yeoun/Native/YeounFeedback.swift",
+    "sha256": "ca121b91333b8cd8ae8d38e1745ffb59d2abe0b7567c9f762a6672a48e14deb1"
+  },
+  {
+    "path": "package-lock.json",
+    "sha256": "ffbbccd57dfb745c8c03916678ce668b4f6275f99034696d1ddf8115c5cbd1c0"
+  },
+  {
+    "path": "package.json",
+    "sha256": "608ed83b84a8a87cbad4ec667c056737578bd8dc1144dd3922ecbc3ed4206968"
+  },
+  {
+    "path": "src/components/BottomSheet.tsx",
+    "sha256": "f75753b8a62d8bee6f6f51e499744052952245e52519badd1d4b5f047443eaa6"
+  },
+  {
+    "path": "src/components/CardSlotDial.tsx",
+    "sha256": "33867b3bc0608ba008bf0fbb9432f4b102e07c0af1e5f34594f9e307622ee0b2"
+  },
+  {
+    "path": "src/components/Character.tsx",
+    "sha256": "0dd33eefc6b98c6245b6bcb5f67c3aece1ef2acde416ce266f246d83688cc534"
+  },
+  {
+    "path": "src/components/ChoiceStage.native.tsx",
+    "sha256": "a93825415eedcbe9a48a5d6c8cae30a7997eba52235fc24ffce7f7d65efb9e21"
+  },
+  {
+    "path": "src/components/ChoiceStage.types.ts",
+    "sha256": "d0a30c5ca05387cd9d0b0acefc401d96bb2325209b7ac4f6c26ef5e30328bdc6"
+  },
+  {
+    "path": "src/components/MoodDial.tsx",
+    "sha256": "b59a7418ff589bfd5cc28a7688fc6921ce73e82b20495e68ca5b0e4bedb2dee5"
+  },
+  {
+    "path": "src/components/MotionRoot.native.tsx",
+    "sha256": "aee42db3a8a68802b4e8d442462f2ff6ad83ea2a8bdec229082027cacebca9ae"
+  },
+  {
+    "path": "src/components/OptionRail.tsx",
+    "sha256": "acc654f74061be8c535a49efac2dd8162301bef77468f66f423685d8a90beab3"
+  },
+  {
+    "path": "src/components/RailHighlight.native.tsx",
+    "sha256": "15a5454d58f07d2bd6bc054df2abb4a27562be8992905ccd690547dbf8fc9f05"
+  },
+  {
+    "path": "src/components/RotarySurface.native.tsx",
+    "sha256": "7fe666cbce615e178095d8e58e5aa4c4432c9c6b15d6dfd902a826a79ba0c07c"
+  },
+  {
+    "path": "src/components/RotarySurface.types.ts",
+    "sha256": "1a197e2fe6557210b994d4c0a5a0fdea3bea00624fa1e0b6e5e1052176072d4c"
+  },
+  {
+    "path": "src/components/SelectionDial.tsx",
+    "sha256": "8190257ac9ecdc9b241df8c70e0922fa389f3c553e5078a06edbd70204e575be"
+  },
+  {
+    "path": "src/components/StepProgress.tsx",
+    "sha256": "0d5b220d5ed04d13ba61497d5f28dd22cb0f1b051152d50e24f7800444d4852e"
+  },
+  {
+    "path": "src/components/TarotSetup.tsx",
+    "sha256": "ac728f15a135b75c30c5855e8d04fdfc9c3e0f58927d1c2fe413debe65c7beb4"
+  },
+  {
+    "path": "src/screens/Journal.tsx",
+    "sha256": "1993d746bbd8b9d050ed2935d72fb6ce0ce37b70351ebdd7ead49db20e57e98e"
+  },
+  {
+    "path": "src/screens/P0Tarot.tsx",
+    "sha256": "de408330f8ada40042c9b0d2bd8b954700091bbeff4df63959e3da74c0375208"
+  },
+  {
+    "path": "src/screens/Story.tsx",
+    "sha256": "626ccde486b7c6a4ea774b035e394b5ac4c90fa317aa0264fcf3f51e6fec6ba7"
+  },
+  {
+    "path": "src/screens/Talk.tsx",
+    "sha256": "25093e4bad72e94f3760ea363f159c8b6b26f1c40c5b38e743f2dc36e31a2d5c"
+  },
+  {
+    "path": "src/services/feedback.native.ts",
+    "sha256": "ff41aa704ebad20a0cc9fd78e5466ef3b632b3c3e8a8d6af6b2ff4abb25f328d"
+  }
+]
