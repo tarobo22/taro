@@ -15,9 +15,11 @@ export function startVoice(onText:(v:string)=>void,onState:(v:string)=>void,onEn
  void Promise.resolve().then(async()=>{
   if(!session.active)return;
   if(!module){session.finish('이 기기에서는 음성 입력을 사용할 수 없어요. 글로 이어갈 수 있어요.');return;}
-  const permission=await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,{title:'음성으로 이야기하기',message:'말한 내용을 글로 옮길 때 마이크를 사용합니다.',buttonPositive:'허용',buttonNegative:'지금은 안 할래요'});
-  if(!session.active)return;
-  if(permission!==PermissionsAndroid.RESULTS.GRANTED){session.finish('마이크 권한 없이도 글로 이야기할 수 있어요.');return;}
+  if(Platform.OS==='android'){
+   const permission=await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,{title:'음성으로 이야기하기',message:'말한 내용을 글로 옮길 때 마이크를 사용합니다.',buttonPositive:'허용',buttonNegative:'지금은 안 할래요'});
+   if(!session.active)return;
+   if(permission!==PermissionsAndroid.RESULTS.GRANTED){session.finish('마이크 권한 없이도 글로 이야기할 수 있어요.');return;}
+  }
   const scoped=typeof module.startCapture==='function';
   const emitter=new NativeEventEmitter(module);
   const subscription=emitter.addListener('YeounSpeech',event=>{

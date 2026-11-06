@@ -25,3 +25,13 @@ reports/
 !.env.example
 # hot-updater
 .hot-updater/output
+
+# iOS dependencies and local build products
+ios/Pods/
+ios/build/
+ios/DerivedData/
+ios/.xcode.env.local
+ios/YeounCore/.build/
+ios/YeounCore/.swiftpm/
+vendor/bundle/
+.bundle/

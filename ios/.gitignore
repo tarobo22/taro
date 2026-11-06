@@ -1,0 +1,8 @@
+Pods/
+build/
+DerivedData/
+.xcode.env.local
+*.xcuserstate
+xcuserdata/
+YeounCore/.build/
+YeounCore/.swiftpm/

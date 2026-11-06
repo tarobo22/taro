@@ -1,0 +1,57 @@
+name: iOS simulator checks
+on:
+  push:
+    paths: ['ios/**', 'src/**', 'App.tsx', 'index.js', 'package*.json', 'Gemfile*', '.github/workflows/ios.yml']
+  pull_request:
+    paths: ['ios/**', 'src/**', 'App.tsx', 'index.js', 'package*.json', 'Gemfile*', '.github/workflows/ios.yml']
+  workflow_dispatch:
+concurrency:
+  group: ios-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  simulator:
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: 24.22.2
+          cache: npm
+      - run: npm ci
+      - name: Test native rules
+        run: |
+          mkdir -p .local/ios-proof
+          swift test --package-path ios/YeounCore --scratch-path .local/ios-core-build 2>&1 | tee .local/ios-proof/core.log
+      - name: Install iOS dependencies
+        run: |
+          bundle config set --local path vendor/bundle
+          bundle install --jobs 4
+          cd ios
+          bundle exec pod install
+      - name: Build unsigned simulator application
+        run: |
+          xcodebuild -workspace ios/Yeoun.xcworkspace -scheme Yeoun -configuration Release \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath .local/ios-derived -jobs 3 CODE_SIGNING_ALLOWED=NO build \
+            2>&1 | tee .local/ios-proof/build.log
+      - name: Launch on a clean simulator
+        run: |
+          runtime=$(xcrun simctl list runtimes -j | python3 -c 'import json,sys; print(next(r["identifier"] for r in json.load(sys.stdin)["runtimes"] if r["isAvailable"] and ".iOS-" in r["identifier"]))')
+          device=$(xcrun simctl create Yeoun-CI com.apple.CoreSimulator.SimDeviceType.iPhone-16 "$runtime")
+          xcrun simctl boot "$device"
+          xcrun simctl bootstatus "$device" -b
+          xcrun simctl install "$device" .local/ios-derived/Build/Products/Release-iphonesimulator/Yeoun.app
+          xcrun simctl launch "$device" com.yeoun.app | tee .local/ios-proof/launch.log
+          sleep 5
+          xcrun simctl spawn "$device" launchctl list | grep 'com.yeoun.app'
+          xcrun simctl io "$device" screenshot .local/ios-proof/launch.png
+          xcrun simctl openurl "$device" 'yeoun://auth/complete'
+          xcrun simctl shutdown "$device"
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        if: always()
+        with:
+          name: ios-simulator-proof
+          path: .local/ios-proof
