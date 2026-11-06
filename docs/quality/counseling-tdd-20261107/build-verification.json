@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-11-06T20:05:36.704746+00:00",
+  "typecheck": "PASS",
+  "build": "PASS",
+  "build_kind": "Metro Android production JS bundle",
+  "artifact_sha256": "947ff174f7c38bd847e0335cc466b87e830dc5a525791c78fc6d12242c07e783",
+  "artifact_bytes": 3243813,
+  "native_device_execution_this_task": false,
+  "ios_execution_this_task": false,
+  "real_gpt_calls_this_task": 0,
+  "layout_snapshot_tests_added": 0
+}
