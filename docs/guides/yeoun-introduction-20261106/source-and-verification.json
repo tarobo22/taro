@@ -1,0 +1,57 @@
+{
+  "product_source": {
+    "taro": {
+      "files_checked": 345,
+      "unchanged": true,
+      "source_head": "11051923a22eef00c92b8252f3acec1341354ef8"
+    },
+    "taro-raect": {
+      "files_checked": 254,
+      "unchanged": true,
+      "source_head": "2a16d561b6660ea7bffca8a677cb110a6a47522b"
+    },
+    "taro-back": {
+      "files_checked": 147,
+      "unchanged": true,
+      "source_head": "a84dee4d7e97f0a2cf115ef4b90d96f6f12d8fbf"
+    }
+  },
+  "new_design_tests": 0,
+  "product_tests_modified": 0,
+  "actual_ai_calls": 0,
+  "microphone_recording": false,
+  "new_paid_provider_calls": 0,
+  "pdf_pages_rendered": 31,
+  "videos_verified": 15,
+  "media_verification": "media-verification.json",
+  "docs": [
+    {
+      "id": "00-all-in-one",
+      "sha256": "e08b40ffe81d0472479e94da07fbc8028151d582872cddf9e174ac37293a216d"
+    },
+    {
+      "id": "01-product-plan-v1",
+      "sha256": "c632b3568cec7c5b4d110eeb5be7191a4342ac60b6eaf865f91b6aecd6cc4c88"
+    },
+    {
+      "id": "02-development-plan-v1",
+      "sha256": "45a460a139d6919829182a1b840ed26ad6501b68d27d148b094fa5380b69a4ea"
+    },
+    {
+      "id": "03-design-improvement-v2",
+      "sha256": "66543514185286e3a67bae90dd0dd89a42cc8a19c6af5edabc61e62a54798147"
+    },
+    {
+      "id": "04-code-changes-v2",
+      "sha256": "0f19417fb2c98e1e4b3242730d63c82a919f5199d76dfea595a5364a6b1e4d30"
+    },
+    {
+      "id": "05-user-guide",
+      "sha256": "6cc3c723578f048bf3893f7e7dba39ec2351a8e5bfeb6519ea1bb9f10e524d8e"
+    },
+    {
+      "id": "06-ai-integration-v3-plan",
+      "sha256": "5899dd4ed2c57d0f7af5bc4a285417d40beb3088638fee442ce3975433f47ed5"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "id": "00-all-in-one",
+    "title": "통합 문서",
+    "file": "pdfs/00-all-in-one.pdf",
+    "pages": 31,
+    "sha256": "e08b40ffe81d0472479e94da07fbc8028151d582872cddf9e174ac37293a216d",
+    "bytes": 1980549
+  },
+  {
+    "id": "01-product-plan-v1",
+    "title": "기획안 1",
+    "version": "1안 · 현황 대조판",
+    "file": "pdfs/01-product-plan-v1.pdf",
+    "pages": 4,
+    "sha256": "c632b3568cec7c5b4d110eeb5be7191a4342ac60b6eaf865f91b6aecd6cc4c88",
+    "bytes": 398725
+  },
+  {
+    "id": "02-development-plan-v1",
+    "title": "개발안 1",
+    "version": "1안 · 현재 구조와 개발 기준",
+    "file": "pdfs/02-development-plan-v1.pdf",
+    "pages": 4,
+    "sha256": "45a460a139d6919829182a1b840ed26ad6501b68d27d148b094fa5380b69a4ea",
+    "bytes": 145712
+  },
+  {
+    "id": "03-design-improvement-v2",
+    "title": "디자인 개선안 2",
+    "version": "2안 · 구현과 다음 개선",
+    "file": "pdfs/03-design-improvement-v2.pdf",
+    "pages": 4,
+    "sha256": "66543514185286e3a67bae90dd0dd89a42cc8a19c6af5edabc61e62a54798147",
+    "bytes": 292147
+  },
+  {
+    "id": "04-code-changes-v2",
+    "title": "코드 변화 2",
+    "version": "2안 · 실제 변경 해설",
+    "file": "pdfs/04-code-changes-v2.pdf",
+    "pages": 4,
+    "sha256": "0f19417fb2c98e1e4b3242730d63c82a919f5199d76dfea595a5364a6b1e4d30",
+    "bytes": 137652
+  },
+  {
+    "id": "05-user-guide",
+    "title": "전체 사용방법",
+    "version": "현재 앱 · 사용 안내",
+    "file": "pdfs/05-user-guide.pdf",
+    "pages": 9,
+    "sha256": "6cc3c723578f048bf3893f7e7dba39ec2351a8e5bfeb6519ea1bb9f10e524d8e",
+    "bytes": 784029
+  },
+  {
+    "id": "06-ai-integration-v3-plan",
+    "title": "AI 연동 3안",
+    "version": "3차 계획 · 미구현 항목 포함",
+    "file": "pdfs/06-ai-integration-v3-plan.pdf",
+    "pages": 5,
+    "sha256": "5899dd4ed2c57d0f7af5bc4a285417d40beb3088638fee442ce3975433f47ed5",
+    "bytes": 148837
+  }
+]
