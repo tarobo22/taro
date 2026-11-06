@@ -1,10 +1,20 @@
 {
   "path": "C:\\Users\\chang\\Documents\\ChatGPT\\0915 2\\output\\pdf\\yeoun-non-ai-implementation-20261106.pdf",
-  "pages": 16,
-  "bytes": 562144,
-  "sha256": "6d516a6a7055177eff04a4eb8c3c8a89a6941e3db0d2543def6a9e63051a7b76",
+  "pages": 18,
+  "bytes": 888039,
+  "sha256": "465d1246da6a57274c5606fc701d1eb534a880a674e82746d0537f3a4704bb39",
   "required_text_checks_passed": true,
-  "render_visual_verification": "passed: all16 pages rendered and contact reviewed; pages3/5/9/13/14/16 individually inspected",
-  "rendered_pages": 16,
-  "contact_sheet_sha256": "776c4c41f78a2f26b5af9d507d03a703a8c1c4283f539dd98b7857f8cc8ecfb0"
+  "render_visual_verification": "passed: all18 pages rendered; both contact sheets and pages1/2/3/6/17/18 individually reviewed",
+  "rendered_pages": 18,
+  "text_checks": {
+    "latest_screenshot_page": true,
+    "latest_specification": true,
+    "current_git_branch": true,
+    "performance_provenance": true,
+    "replacement_glyph_absent": true
+  },
+  "contact_sheet_sha256": {
+    "contact-01.png": "1526953f65caf842f2eb453c93496d0cb37695c7cc0a558d7bb49bec35196d80",
+    "contact-10.png": "3a0993bde1d3e2ae924cd5012084272da58ca3518812141d56c270ed3e259f31"
+  }
 }
