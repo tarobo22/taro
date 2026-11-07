@@ -85,14 +85,8 @@ android {
         versionCode 6
         versionName "1.5.0"
     }
-    signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-    }
+    // Keep the Android plugin's default debug configuration. It creates the
+    // local SDK test certificate when needed, including in a clean worktree.
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
