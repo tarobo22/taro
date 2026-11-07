@@ -9,6 +9,7 @@ import {feedback} from '../services/feedback';
 import type {RotaryProps} from './RotarySurface.types';
 
 const STEP=Math.PI/8;
+const WHEEL_STEP=52;
 function bound(value:number,count:number,circular:boolean){'worklet';return circular?value:Math.max(0,Math.min(count-1,value));}
 function ordinal(value:number,count:number){'worklet';return ((Math.round(value)%count)+count)%count;}
 function FanCard({i,count,p,shuffle,width,chosen,reduced}:{i:number;count:number;p:SharedValue<number>;shuffle:SharedValue<number>;width:number;chosen:boolean;reduced:boolean}){
@@ -24,6 +25,19 @@ function FanCard({i,count,p,shuffle,width,chosen,reduced}:{i:number;count:number
   <Circle cx={43} cy={67} r={7} color={color.action}/>
   {chosen?<Circle cx={68} cy={19} r={5} color={color.action}/>:null}
  </Group>;
+}
+
+/** Numbers roll with the same UI-thread position as the cards, without per-frame React updates. */
+function WheelNumber({i,count,p,circular,width}:{i:number;count:number;p:SharedValue<number>;circular:boolean;width:number}){
+ const roll=useAnimatedStyle(()=>{
+  let d=i-p.value;if(circular)d-=Math.round(d/count)*count;
+  const edge=Math.min(1,Math.abs(d)/3.5);
+  return {opacity:Math.max(0,1-edge*.85),transform:[{perspective:350},{translateX:d*WHEEL_STEP},{rotateY:(-d*16)+'deg'},{scale:1-edge*.22}]};
+ });
+ return <Animated.View style={[{position:'absolute',left:width/2-WHEEL_STEP/2,top:13,width:WHEEL_STEP,alignItems:'center'},roll]}>
+  <Text selectable={false} style={{fontSize:19,lineHeight:31,fontWeight:'600',color:color.action}}>{i+1}</Text>
+  <View style={{height:12,marginTop:2,width:WHEEL_STEP,flexDirection:'row',justifyContent:'space-around',alignItems:'flex-end'}}>{[0,1,2,3].map(t=><View key={t} style={{width:1,height:t===2?10:5,backgroundColor:color.mintDeep}}/>)}</View>
+ </Animated.View>;
 }
 
 /** UI-thread rotation is also the source of truth for the card fan. React only receives detents. */
@@ -46,9 +60,30 @@ export function RotarySurface({options,index,onChange,label,circular=false,disab
   .onUpdate(e=>{const angle=Math.atan2(e.x-48,48-e.y);let delta=angle-lastAngle.value;if(delta>Math.PI)delta-=Math.PI*2;if(delta<-Math.PI)delta+=Math.PI*2;angleTotal.value+=delta;lastAngle.value=angle;p.value=bound(start.value+angleTotal.value/STEP,count,circular);})
   .onEnd(e=>{const tangent=(e.velocityX*Math.cos(lastAngle.value)+e.velocityY*Math.sin(lastAngle.value))/(42*STEP);const projected=bound(p.value+Math.max(-1.25,Math.min(1.25,tangent*.075)),count,circular),target=Math.round(projected);if(reduced){p.value=target;dragging.value=false;scheduleOnRN(detent,ordinal(target,count),true);}else p.value=withSpring(target,{damping:23,stiffness:230,mass:.75},finished=>{if(finished){dragging.value=false;scheduleOnRN(detent,ordinal(target,count),true);}});})
   .onFinalize((_e,success)=>{if(!success){dragging.value=false;p.value=withSpring(Math.round(p.value),{damping:24,stiffness:240});scheduleOnRN(detent,ordinal(p.value,count),true);}});
+ const slide=Gesture.Pan().enabled(!disabled&&count>1).maxPointers(1).activeOffsetX([-3,3]).failOffsetY([-18,18])
+  .onStart(()=>{cancelAnimation(p);start.value=p.value;dragging.value=true;})
+  .onUpdate(e=>{p.value=bound(start.value-e.translationX/WHEEL_STEP,count,circular);})
+  .onEnd(e=>{
+   const target=Math.round(bound(p.value+(reduced?0:Math.max(-3,Math.min(3,-e.velocityX/WHEEL_STEP*.12))),count,circular));
+   if(reduced){p.value=target;dragging.value=false;scheduleOnRN(commitWheel,ordinal(target,count));}
+   else p.value=withSpring(target,{damping:25,stiffness:240,mass:1},finished=>{if(finished){dragging.value=false;scheduleOnRN(commitWheel,ordinal(target,count));}});
+  })
+  .onFinalize((_e,success)=>{if(!success&&dragging.value){const target=Math.round(p.value);p.value=reduced?target:withSpring(target,{damping:25,stiffness:240});dragging.value=false;scheduleOnRN(commitWheel,ordinal(target,count));}});
+ function commitWheel(next:number){if(!latest.current.disabled&&latest.current.index!==next)latest.current.onChange(next);}
+ useEffect(()=>{if(cards&&disabled){cancelAnimation(p);dragging.value=false;p.value=latest.current.index;}},[disabled,!!cards]);
  const keyIndex=(next:number)=>{if(disabled||!options.length)return;if(!circular&&(next<0||next>=count)){feedback('boundary');return;}setHint(false);onChange((next+count)%count);};
+ if(cards)return <View style={{gap:7,opacity:disabled?.45:1}} onLayout={e=>setWidth(e.nativeEvent.layout.width)}>
+  <GestureDetector gesture={slide}><View accessible focusable accessibilityRole="adjustable" accessibilityLabel="카드 다이얼 · 좌우로 밀기" accessibilityValue={{min:1,max:count,now:index+1,text:options[index]}} accessibilityState={{disabled}} accessibilityActions={[{name:'increment'},{name:'decrement'}]} onAccessibilityAction={e=>keyIndex(index+(e.nativeEvent.actionName==='decrement'?-1:1))}>
+   <Canvas style={{width,height:192}} accessible={false}>{cards.map((id,i)=>({id,i,d:Math.abs(((i-index+count*1.5)%count)-count/2)})).sort((a,b)=>b.d-a.d).map(({id,i})=><FanCard key={id} i={i} count={count} p={p} shuffle={shuffle} width={width} chosen={selected.includes(id)} reduced={reduced}/>)}</Canvas>
+   <View pointerEvents="none" importantForAccessibility="no-hide-descendants" style={{height:72,overflow:'hidden',borderRadius:16,backgroundColor:color.sage,borderTopWidth:1,borderBottomWidth:1,borderColor:color.line}}>
+    <View style={{position:'absolute',top:7,bottom:7,left:width/2-22,width:44,borderRadius:10,backgroundColor:color.mint}}/>
+    <View style={{position:'absolute',top:0,left:width/2-1.5,width:3,height:10,borderRadius:2,backgroundColor:color.action}}/>
+    {options.map((option,i)=><WheelNumber key={option} i={i} count={count} p={p} circular={circular} width={width}/>)}
+   </View>
+  </View></GestureDetector>
+  <Text style={{textAlign:'center',fontSize:12,color:color.muted}}>좌우로 밀어 카드를 골라요</Text>
+ </View>;
  return <View style={{gap:8}} onLayout={e=>setWidth(e.nativeEvent.layout.width)}>
-  {cards?<Canvas style={{width,height:192}} accessible={false}>{cards.map((id,i)=>({id,i,d:Math.abs(((i-index+count*1.5)%count)-count/2)})).sort((a,b)=>b.d-a.d).map(({id,i})=><FanCard key={id} i={i} count={count} p={p} shuffle={shuffle} width={width} chosen={selected.includes(id)} reduced={reduced}/>)}</Canvas>:null}
   <View style={{flexDirection:'row',alignItems:'center',gap:12}}>
    <GestureDetector gesture={gesture}><View accessible focusable accessibilityRole="adjustable" accessibilityLabel={label} accessibilityValue={{min:0,max:count-1,now:index,text:options[index]}} accessibilityActions={[{name:'increment'},{name:'decrement'}]} onAccessibilityAction={e=>keyIndex(index+(e.nativeEvent.actionName==='decrement'?-1:1))} style={{width:96,height:96}}>
     <Canvas style={{width:96,height:96}}><Circle cx={48} cy={48} r={42} color={color.sage}/><Group origin={{x:48,y:48}} transform={turn}><Path path={ticks} color={color.mintDeep} style="stroke" strokeWidth={2}/></Group><Circle cx={48} cy={48} r={29} color={color.paper}/><Circle cx={48} cy={6} r={4} color={color.action}/></Canvas>
