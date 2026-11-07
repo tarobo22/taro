@@ -1,7 +1,7 @@
 {
   "artifact": "yeoun-preview-x86_64.apk",
-  "bytes": 66822765,
-  "sha256": "bf0419a50bb44d870f535416dd8921e70db841f6b5609864fa1bdc3b33dc2390",
+  "bytes": 66822757,
+  "sha256": "5ed2a4fe408bc3bb91410153530e80b2f505f44a2a4e87ff7107bdd186a77c10",
   "applicationId": "com.yeoun.preview.skins",
   "abi": [
     "x86_64"
@@ -23,5 +23,5 @@
   "nativeMeowSha256": "27e7a498e07815eff8798fb3dfdda5b06decf06d014e62c70f1736a57b2967a9",
   "apiUrlVerifiedInBundle": true,
   "bundledJavaScript": true,
-  "sourceCommit": "115cc48995e5d0daa52bc2b9aa2a236f16bdfaa9"
+  "sourceCommit": "73cf377261efd9e944ced231ca04a01f063b6a07"
 }

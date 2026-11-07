@@ -1,0 +1,22 @@
+{
+  "runId": 42342416808,
+  "sourceCommit": "73cf377261efd9e944ced231ca04a01f063b6a07",
+  "swiftPassed": 6,
+  "swiftFailures": 0,
+  "buildSucceeded": true,
+  "launchProcessObserved": true,
+  "pid": 40875,
+  "screen": "ios-launch.png",
+  "screenSha256": "1a2bb8a9718964742cc1eff5ad346599a1e69e47a3961380d78019b5b278af3d",
+  "buildSha256": "58e8015cbb7d0aba3131d5f75f10d1c7f5a66b7d2afd502ad529740d7d4880cf",
+  "coreSha256": "9056fe259ae05f51be27a54cef9f18b4359bb12a3e54ac559ee851e194cfd10b",
+  "launchSha256": "a17432e58a0835959b72719fc1ae09746bcae47cf10d18d37155c2e561c6c138",
+  "processSha256": "1c9dca02e1a9849c4f5c67775aa133ae28253c8064a8ede4d672f4945549258b",
+  "visualReview": {
+    "deviceType": "iPhone 16",
+    "observedScreen": "Account connection recovery",
+    "titleClearsDisplayCutout": true,
+    "retryButtonVisible": true,
+    "endToEndLoginVerified": false
+  }
+}

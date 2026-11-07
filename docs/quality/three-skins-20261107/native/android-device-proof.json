@@ -1,8 +1,8 @@
 {
-  "recordedAt": "2026-11-07T05:08:04.521433+00:00",
+  "recordedAt": "2026-11-07T05:26:29.927023+00:00",
   "method": "Observed taps and theme screenshots on the Android 35 preview. UiAutomator verified the offline retry response.",
   "apkReceipt": "android-x86.json",
-  "sourceCommit": "115cc48995e5d0daa52bc2b9aa2a236f16bdfaa9",
+  "sourceCommit": "73cf377261efd9e944ced231ca04a01f063b6a07",
   "package": "com.yeoun.preview.skins",
   "androidApi": 35,
   "architecture": "x86_64",
@@ -19,19 +19,19 @@
   "screenCaptures": {
     "cafe": {
       "file": "android-cafe.png",
-      "sha256": "4f031fa6fbfeba2a4068fe74f0274a42d239801dcd7e7f71badea32c424878f2"
+      "sha256": "628e2d686641601ea277a90187673586d377f68c4c340bddc0c57fc6b119a05b"
     },
     "clinic": {
       "file": "android-clinic.png",
-      "sha256": "e40161a07eb4117b0c1089fb6dfa37b0d2048a740e835830646e577c3d8dcda1"
+      "sha256": "a5481445c50c59953b5a2c5a7c4d8fa14da887ed4de51f582544017352bf8647"
     },
     "playroom": {
       "file": "android-playroom.png",
-      "sha256": "9e9beed8979c3dce20e90694f83abc764dbea10e7b520f6b986c2226b7e36891"
+      "sha256": "8fcaf2b370a23ddf71ef9303a1c5c4be6f986d3fb9eabee5df6f3686b22ecbb1"
     },
     "restored-playroom": {
       "file": "android-restored-playroom.png",
-      "sha256": "b60169a2e7ca41ede03a1a2fae50aa986013fd22c4a31cf20d00bcb05828423b"
+      "sha256": "e3971154b6b6eda4806a927d0ec58124130e2503a9af58510e15d42de405d6e1"
     }
   },
   "backend": "ADB reverse to the existing local synthetic QA API",
@@ -45,6 +45,7 @@
     "processSurvivesOfflineRetry": true,
     "restoredAfterReconnectAndColdLaunch": "playroom",
     "screenshot": "android-startup-recovery.png",
-    "screenshotSha256": "80323ccc843d3763a18963283615384a4ff00e145d3df3d1b9e979919b61fa23"
+    "screenshotSha256": "9b836579048319a833d3df46d5080d52b3388237d14581c87b9c0a3683a516fe",
+    "safeAreaTitleVisible": true
   }
 }

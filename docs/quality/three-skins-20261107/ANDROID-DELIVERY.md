@@ -1,6 +1,6 @@
 # 세 공간 Android 납품 기록
 
-[설치 파일과 체크섬](https://github.com/tarobo22/taro/releases/tag/untagged-e3f0a7ff0b87244ccae8) · GitHub 초안 릴리스
+[설치 파일과 체크섬](https://github.com/tarobo22/taro/releases/tag/untagged-815d965dc371e2631e4c) · GitHub 초안 릴리스
 
 | 설치본 | 검증 |
 |---|---|
@@ -24,7 +24,7 @@
 | JSON·이미지만 바꾸면 Gradle이 이전 번들 재사용 | Android 번들 작업의 입력에 src JSON과 assets 추가 | JS 코드를 그대로 두고 API 포트만 바꿨을 때 새 값이 번들에 들어감 |
 | Android에서 중첩 SVG 위치가 달라 고양이 눈·입이 몸 밖에 렌더링 | 몸과 같은 좌표계의 SVG 그룹으로 얼굴 위치 지정 | 수정 APK의 실제 놀이방 화면에서 정상 표시 |
 
-앱 코드: 115cc48995e5d0daa52bc2b9aa2a236f16bdfaa9. 기존 기능 테스트는 수정·삭제·완화하지 않았다. [최종 코드의 RN 검사](https://github.com/tarobo22/taro/actions/runs/42340678125)에서 타입·기능·번들 검증 통과.
+앱 코드: 73cf377261efd9e944ced231ca04a01f063b6a07. 기존 기능 테스트는 수정·삭제·완화하지 않았다. [최종 코드의 RN 검사](https://github.com/tarobo22/taro/actions/runs/42342416777)에서 타입·기능·번들 검증 통과.
 
 ## 미리보기 실행과 재현
 
@@ -48,4 +48,6 @@ cd android
 
 기존 APK는 저장된 테스트 세션의 연결을 확인하는 중에 Store가 필요한 재시도 버튼을 렌더링해 예외가 발생했다. 수정 APK에서 QA API 연결을 끊은 채 실행하고 재시도 버튼을 눌렀다. 앱 프로세스가 유지됐고, 재시도 실패 메시지도 표시됐다. 연결을 복원하고 앱을 다시 열자 선택한 놀이방이 유지됐다. [실제 재시도 화면](native/android-startup-recovery.png)
 
-iOS의 [실패 실행](https://github.com/tarobo22/taro/actions/runs/42337300637)에서 같은 예외가 확인됐다. [수정 커밋의 시뮬레이터 실행](https://github.com/tarobo22/taro/actions/runs/42340677998)에서 재검증 중이다. Swift 규칙 테스트는 유지했고, 실행 후 PID와 설치된 실행 파일을 대조하도록 승인받은 CI 설정을 적용했다.
+iOS의 [실패 실행](https://github.com/tarobo22/taro/actions/runs/42337300637)에서 같은 예외를 확인했다. [앱 종료 수정 후 실행](https://github.com/tarobo22/taro/actions/runs/42340677998)은 통과했고, 캡처에서 제목이 다이내믹 아일랜드와 겹쳤다. 연결 복구 화면에 안전 영역을 적용했다. Android에서 제목·재시도·놀이방 복원을 다시 확인했고, [최종 iOS 시뮬레이터 검사](https://github.com/tarobo22/taro/actions/runs/42342416808)도 통과했다.
+
+iPhone 16에서 Swift 테스트 6건, 빌드·설치, 실행 5초 뒤 PID와 실행 파일 일치, 화면 캡처 및 딥링크 열기 명령을 확인했다. [iOS 실제 복구 화면](native/ios-launch.png)에서 제목과 재시도 버튼이 다이내믹 아일랜드에 가려지지 않는다. 이 시뮬레이터 검증은 연결 복구 화면까지이며 실제 계정 로그인은 검증 범위에 포함하지 않았다.
