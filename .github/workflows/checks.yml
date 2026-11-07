@@ -10,9 +10,12 @@ concurrency:
   cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 permissions:
   contents: read
+defaults:
+  run:
+    shell: bash
 jobs:
   types-and-behavior:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -29,7 +32,7 @@ jobs:
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output .local/check/index.android.bundle --assets-dest .local/check/assets --max-workers 2
   android:
     needs: types-and-behavior
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
@@ -73,7 +76,7 @@ jobs:
   release:
     needs: android
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: write
