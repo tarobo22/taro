@@ -46,7 +46,7 @@ jobs:
       - run: node scripts/configure-demo.mjs
       - name: Prepare Android SDK
         run: |
-          sdkmanager 'platforms;android-36' 'build-tools;36.0.0' 'ndk;27.1.12297006'
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36' 'build-tools;36.0.0' 'ndk;27.1.12297006'
           mkdir -p "$HOME/.android"
           if [ ! -f "$HOME/.android/debug.keystore" ]; then
             keytool -genkeypair -keystore "$HOME/.android/debug.keystore" -storepass android -keypass android \
@@ -88,7 +88,7 @@ jobs:
           STORE_PASSWORD: ${{ secrets.YEOUN_ANDROID_STORE_PASSWORD }}
         run: |
           test -n "$KEYSTORE_B64" && test -n "$STORE_PASSWORD"
-          sdkmanager 'build-tools;36.0.0'
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'build-tools;36.0.0'
           keyfile="$RUNNER_TEMP/yeoun-demo.jks"
           trap 'rm -f "$keyfile"' EXIT
           umask 077
