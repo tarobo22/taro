@@ -21,7 +21,7 @@ with open(sys.argv[1], 'wb') as stream:
 PY
 codesign --force --sign - --entitlements "$proof/simulator-entitlements.plist" --generate-entitlement-der "$app"
 codesign --verify --strict "$app"
-codesign -d --entitlements - "$app" > "$proof/verified-entitlements.plist"
+codesign -d --entitlements - --xml "$app" > "$proof/verified-entitlements.plist"
 python3 - "$proof/verified-entitlements.plist" <<'PY'
 import plistlib, sys
 with open(sys.argv[1], 'rb') as stream:
