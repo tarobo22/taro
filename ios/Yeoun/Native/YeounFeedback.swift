@@ -41,12 +41,12 @@ final class YeounFeedback: NSObject {
 
     @objc func play(_ kind: String) {
         guard !captureMuted, UIApplication.shared.applicationState == .active else { return }
-        if haptics {
+        if haptics && kind != "meow" {
             if kind == "select" || kind == "tick" { selectionFeedback.selectionChanged(); selectionFeedback.prepare() }
             else if kind == "confirm" { UINotificationFeedbackGenerator().notificationOccurred(.success) }
             else { impactFeedback.impactOccurred(intensity: kind == "boundary" ? 0.25 : 0.4); impactFeedback.prepare() }
         }
-        let names = ["tap": "soft_tap", "select": "soft_select", "confirm": "soft_confirm", "back": "light_tap", "tick": "light_tap", "boundary": "light_tap", "shuffle": "card_shuffle", "flip": "card_flip"]
+        let names = ["tap": "soft_tap", "select": "soft_select", "confirm": "soft_confirm", "back": "light_tap", "tick": "light_tap", "boundary": "light_tap", "shuffle": "card_shuffle", "flip": "card_flip", "meow": "cat_meow"]
         guard sound, let name = names[kind], let url = Bundle.main.url(forResource: name, withExtension: "wav", subdirectory: "Sounds") else { return }
         do {
             try AVAudioSession.sharedInstance().setCategory(.ambient, options: [.mixWithOthers])

@@ -31,7 +31,7 @@ class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactC
     pool.setOnLoadCompleteListener { _, id, status -> if (status == 0) synchronized(ready) { ready.add(id) } }
     mapOf("tap" to R.raw.yeoun_tap, "select" to R.raw.yeoun_select, "confirm" to R.raw.yeoun_confirm,
       "boundary" to R.raw.yeoun_back, "back" to R.raw.yeoun_back, "tick" to R.raw.yeoun_back, "shuffle" to R.raw.yeoun_shuffle,
-      "flip" to R.raw.yeoun_flip).forEach { (name, resource) -> sounds[name] = pool.load(context, resource, 1) }
+      "flip" to R.raw.yeoun_flip, "meow" to R.raw.yeoun_meow).forEach { (name, resource) -> sounds[name] = pool.load(context, resource, 1) }
   }
   override fun getName() = "YeounFeedback"
   @ReactMethod fun configure(sound: Boolean, haptics: Boolean, background: Boolean) {
@@ -66,7 +66,7 @@ class YeounFeedbackModule(private val context: ReactApplicationContext) : ReactC
         }
       }
     }
-    if (hapticsEnabled) UiThreadUtil.runOnUiThread {
+    if (hapticsEnabled && kind != "meow") UiThreadUtil.runOnUiThread {
       if (captureMuted || !foreground || !hapticsEnabled) return@runOnUiThread
       val pattern = when {
         kind == "confirm" && Build.VERSION.SDK_INT >= 30 -> HapticFeedbackConstants.CONFIRM
