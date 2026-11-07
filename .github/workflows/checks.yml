@@ -1,4 +1,4 @@
-name: Mobile checks
+name: Mobile CI and Android release
 on:
   push:
     paths-ignore: ['docs/**', '**/*.md']
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 permissions:
   contents: read
 jobs:
@@ -27,3 +27,87 @@ jobs:
         run: |
           mkdir -p .local/check
           npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output .local/check/index.android.bundle --assets-dest .local/check/assets --max-workers 2
+  android:
+    needs: types-and-behavior
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24.22.2
+          cache: npm
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - run: npm ci
+      - run: node scripts/configure-demo.mjs
+      - name: Prepare Android SDK
+        run: |
+          sdkmanager 'platforms;android-36' 'build-tools;36.0.0' 'ndk;27.1.12297006'
+          mkdir -p "$HOME/.android"
+          if [ ! -f "$HOME/.android/debug.keystore" ]; then
+            keytool -genkeypair -keystore "$HOME/.android/debug.keystore" -storepass android -keypass android \
+              -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -dname 'CN=Android Debug,O=Android,C=US'
+          fi
+      - name: Build APK and check native behavior
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew :app:assembleRelease :app:testReleaseUnitTest \
+            -PreactNativeArchitectures=arm64-v8a,x86_64 --no-daemon --max-workers=2
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: android-candidate
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+          retention-days: 14
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        if: always()
+        with:
+          name: android-native-test-results
+          path: android/app/build/test-results/testReleaseUnitTest
+          retention-days: 14
+  release:
+    needs: android
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        with:
+          name: android-candidate
+          path: candidate
+      - name: Sign and verify the demo APK
+        env:
+          KEYSTORE_B64: ${{ secrets.YEOUN_ANDROID_KEYSTORE_B64 }}
+          STORE_PASSWORD: ${{ secrets.YEOUN_ANDROID_STORE_PASSWORD }}
+        run: |
+          test -n "$KEYSTORE_B64" && test -n "$STORE_PASSWORD"
+          sdkmanager 'build-tools;36.0.0'
+          keyfile="$RUNNER_TEMP/yeoun-demo.jks"
+          trap 'rm -f "$keyfile"' EXIT
+          umask 077
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$keyfile"
+          mkdir -p release
+          signer="$ANDROID_HOME/build-tools/36.0.0/apksigner"
+          "$signer" sign --ks "$keyfile" --ks-key-alias yeoun-demo \
+            --ks-pass env:STORE_PASSWORD --key-pass env:STORE_PASSWORD \
+            --out release/yeoun-demo.apk candidate/app-release.apk
+          "$signer" verify --verbose --print-certs release/yeoun-demo.apk > release/signature.txt
+          (cd release && sha256sum yeoun-demo.apk > SHA256SUMS)
+      - name: Publish verified APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          tag="android-${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          printf 'Demo API: https://yeoun-43-201-209-249.sslip.io/api\nCommit: %s\nARM64 / x86_64. Dedicated demo signing certificate. Not a Play Store release.\n' "$GITHUB_SHA" > release/notes.md
+          gh release create "$tag" release/yeoun-demo.apk release/SHA256SUMS release/signature.txt \
+            --target "$GITHUB_SHA" --title "Yeoun Android demo ${GITHUB_SHA:0:7}" --notes-file release/notes.md --draft
+          gh release edit "$tag" --draft=false --latest
+          printf '### Android demo\n[Download signed APK](https://github.com/%s/releases/download/%s/yeoun-demo.apk)\n' "$GH_REPO" "$tag" >> "$GITHUB_STEP_SUMMARY"

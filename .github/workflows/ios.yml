@@ -1,9 +1,9 @@
 name: iOS simulator checks
 on:
   push:
-    paths: ['ios/**', 'src/**', 'App.tsx', 'index.js', 'package*.json', 'Gemfile*', '.github/workflows/ios.yml']
+    paths: ['ios/**', 'src/**', 'App.tsx', 'index.js', 'package*.json', 'Gemfile*', 'scripts/configure-demo.mjs', '.github/workflows/ios.yml']
   pull_request:
-    paths: ['ios/**', 'src/**', 'App.tsx', 'index.js', 'package*.json', 'Gemfile*', '.github/workflows/ios.yml']
+    paths: ['ios/**', 'src/**', 'App.tsx', 'index.js', 'package*.json', 'Gemfile*', 'scripts/configure-demo.mjs', '.github/workflows/ios.yml']
   workflow_dispatch:
 concurrency:
   group: ios-${{ github.head_ref || github.ref_name }}
@@ -21,6 +21,7 @@ jobs:
           node-version: 24.22.2
           cache: npm
       - run: npm ci
+      - run: node scripts/configure-demo.mjs
       - name: Test native rules
         run: |
           mkdir -p .local/ios-proof
@@ -92,6 +93,8 @@ jobs:
           xcrun simctl io "$device" screenshot "$proof/launch.png"
           xcrun simctl openurl "$device" 'yeoun://auth/complete'
           xcrun simctl shutdown "$device"
+      - name: Package verified simulator application
+        run: ditto -c -k --sequesterRsrc --keepParent .local/ios-derived/Build/Products/Release-iphonesimulator/Yeoun.app .local/ios-proof/Yeoun-simulator.zip
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
         if: always()
         with:
