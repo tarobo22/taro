@@ -80,6 +80,11 @@ jobs:
     timeout-minutes: 10
     permissions:
       contents: write
+    env:
+      SOURCE_MATCH_QUERY: >-
+        (.status == "identical") or
+        (.status == "ahead" and (.files | length) > 0 and (.files | length) < 300 and
+        all(.files[]; (.filename | startswith("docs/") or endswith(".md"))))
     steps:
       - name: Check current main revision
         id: revision
@@ -87,8 +92,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
-          current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
-          if [ "$current" = "$GITHUB_SHA" ]; then
+          current=$(gh api "repos/$GH_REPO/compare/$GITHUB_SHA...main" --jq "$SOURCE_MATCH_QUERY")
+          if [ "$current" = true ]; then
             echo 'current=true' >> "$GITHUB_OUTPUT"
           else
             echo 'Newer main revision detected. This superseded APK was not published.' >> "$GITHUB_STEP_SUMMARY"
@@ -124,23 +129,23 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           tag="android-${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-          current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
-          if [ "$current" != "$GITHUB_SHA" ]; then
+          current=$(gh api "repos/$GH_REPO/compare/$GITHUB_SHA...main" --jq "$SOURCE_MATCH_QUERY")
+          if [ "$current" != true ]; then
             echo 'Newer main revision detected. This superseded APK was not published.' >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
           printf 'Demo API: https://yeoun-43-201-209-249.sslip.io/api\nCommit: %s\nARM64 / x86_64. Dedicated demo signing certificate. Not a Play Store release.\n' "$GITHUB_SHA" > release/notes.md
           if ! gh release create "$tag" release/yeoun-demo.apk release/SHA256SUMS release/signature.txt \
             --target "$GITHUB_SHA" --title "Yeoun Android demo ${GITHUB_SHA:0:7}" --notes-file release/notes.md --draft; then
-            current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
-            if [ "$current" != "$GITHUB_SHA" ]; then
+            current=$(gh api "repos/$GH_REPO/compare/$GITHUB_SHA...main" --jq "$SOURCE_MATCH_QUERY")
+            if [ "$current" != true ]; then
               echo 'Newer main revision detected during upload. APK was not published.' >> "$GITHUB_STEP_SUMMARY"
               exit 0
             fi
             exit 1
           fi
-          current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
-          if [ "$current" != "$GITHUB_SHA" ]; then
+          current=$(gh api "repos/$GH_REPO/compare/$GITHUB_SHA...main" --jq "$SOURCE_MATCH_QUERY")
+          if [ "$current" != true ]; then
             echo 'Newer main revision detected. APK remains a draft.' >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
