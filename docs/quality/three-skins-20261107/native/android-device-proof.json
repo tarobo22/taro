@@ -1,0 +1,41 @@
+{
+  "recordedAt": "2026-11-07T03:47:00.638382+00:00",
+  "method": "Manual taps based on the observed screen, then screenshot review and cold launch. The animated scene prevented the idle wait of uiautomator dump.",
+  "apkReceipt": "android-x86.json",
+  "sourceCommit": "4d14bd319443d32b328b44fe2b49ef26348c85db",
+  "package": "com.yeoun.preview.skins",
+  "androidApi": 35,
+  "architecture": "x86_64",
+  "installedAndLaunched": true,
+  "originalAppStillInstalled": true,
+  "observedThemes": [
+    "cafe",
+    "clinic",
+    "playroom"
+  ],
+  "playroomRestoredAfterForceStopAndLaunch": true,
+  "catFaceCorrectlyAnchored": true,
+  "greetingPawsAndTailVisible": true,
+  "screenCaptures": {
+    "cafe": {
+      "file": "android-cafe.png",
+      "sha256": "94190305e3d556b87e5afd521e5ebda2dedc151fe553f3d82cb49abbb0fb85f5"
+    },
+    "clinic": {
+      "file": "android-clinic.png",
+      "sha256": "15a913643cb4acc5aa59e6c2bebddb80f369b093fa45f4c52c539556f471ac80"
+    },
+    "playroom": {
+      "file": "android-playroom.png",
+      "sha256": "6a32d951cc46b57a26c4674be11350276143750476e57b3fdc895f8e389de2bb"
+    },
+    "restored-playroom": {
+      "file": "android-restored-playroom.png",
+      "sha256": "fc8ada02b9710689fe3fc330d5b23f8ecc874c375b6c4fc98e913745b1fd837d"
+    }
+  },
+  "backend": "ADB reverse to the existing local synthetic QA API",
+  "realGptCalls": 0,
+  "audiblePlaybackMeasured": false,
+  "testReceipt": "Recorded from ADB install Success, am start COLD Status ok, post-relaunch PID and reviewed final screenshots."
+}

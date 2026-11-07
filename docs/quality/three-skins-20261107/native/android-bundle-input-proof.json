@@ -1,0 +1,9 @@
+{
+  "onlyInputChanged": "src/config/endpoints.json in the temporary build copy",
+  "previousApiUrl": "http://127.0.0.1:8808",
+  "changedApiUrl": "http://127.0.0.1:8810",
+  "bundleContainsChangedUrl": true,
+  "gradleExitCode": 0,
+  "durationSeconds": 41.28,
+  "deliveryApksUnchanged": true
+}

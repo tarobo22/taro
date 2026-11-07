@@ -1,0 +1,27 @@
+{
+  "artifact": "yeoun-preview-arm64-v8a.apk",
+  "bytes": 65999471,
+  "sha256": "260268af7a6e6a78fa4fd4638a1f6ce32a96d04f055de2f581940db820aed820",
+  "applicationId": "com.yeoun.preview.skins",
+  "abi": [
+    "arm64-v8a"
+  ],
+  "apiBaseUrl": "http://127.0.0.1:8808",
+  "signing": "Android SDK managed debug certificate; local preview, not store distribution",
+  "signatureVerified": true,
+  "allNinePoseAssets": {
+    "drawable/assets_skins_cafe_explain": "res/Ee.png",
+    "drawable/assets_skins_cafe_greeting": "res/xH.png",
+    "drawable/assets_skins_cafe_rest": "res/sO.png",
+    "drawable/assets_skins_clinic_explain": "res/Vn.png",
+    "drawable/assets_skins_clinic_greeting": "res/Li.png",
+    "drawable/assets_skins_clinic_rest": "res/G4.png",
+    "drawable/assets_skins_playroom_explain": "res/np.png",
+    "drawable/assets_skins_playroom_greeting": "res/Ii.png",
+    "drawable/assets_skins_playroom_rest": "res/uZ.png"
+  },
+  "nativeMeowSha256": "27e7a498e07815eff8798fb3dfdda5b06decf06d014e62c70f1736a57b2967a9",
+  "apiUrlVerifiedInBundle": true,
+  "bundledJavaScript": true,
+  "sourceCommit": "4d14bd319443d32b328b44fe2b49ef26348c85db"
+}
