@@ -1,6 +1,6 @@
 # 세 공간 Android 납품 기록
 
-[설치 파일과 체크섬](https://github.com/tarobo22/taro/releases/tag/untagged-fb1e11eeb96f1244849f) · GitHub 초안 릴리스
+[설치 파일과 체크섬](https://github.com/tarobo22/taro/releases/tag/untagged-e3f0a7ff0b87244ccae8) · GitHub 초안 릴리스
 
 | 설치본 | 검증 |
 |---|---|
@@ -24,7 +24,7 @@
 | JSON·이미지만 바꾸면 Gradle이 이전 번들 재사용 | Android 번들 작업의 입력에 src JSON과 assets 추가 | JS 코드를 그대로 두고 API 포트만 바꿨을 때 새 값이 번들에 들어감 |
 | Android에서 중첩 SVG 위치가 달라 고양이 눈·입이 몸 밖에 렌더링 | 몸과 같은 좌표계의 SVG 그룹으로 얼굴 위치 지정 | 수정 APK의 실제 놀이방 화면에서 정상 표시 |
 
-앱 코드: 4d14bd319443d32b328b44fe2b49ef26348c85db. 기존 기능 테스트는 수정·삭제·완화하지 않았다. [최종 코드의 RN 검사](https://github.com/tarobo22/taro/actions/runs/42335124459)에서 타입·기능·번들 검증 통과.
+앱 코드: 115cc48995e5d0daa52bc2b9aa2a236f16bdfaa9. 기존 기능 테스트는 수정·삭제·완화하지 않았다. [최종 코드의 RN 검사](https://github.com/tarobo22/taro/actions/runs/42340678125)에서 타입·기능·번들 검증 통과.
 
 ## 미리보기 실행과 재현
 
@@ -44,4 +44,8 @@ cd android
 
 각 빌드 직후 app/build/outputs/apk/release/app-release.apk를 ABI별 파일명으로 보관한다. SDK의 기본 테스트 서명과 빌드 방법은 [Android 공식 서명 안내](https://developer.android.com/studio/publish/app-signing)를 참고했다. ARM64 실제 휴대폰과 스토어 배포는 이 검증에 포함되지 않는다.
 
-iOS 최종 실행은 [같은 앱 코드의 시뮬레이터 검사](https://github.com/tarobo22/taro/actions/runs/42335124454)에서 검증한다. 앞선 실행은 앱 빌드를 마쳤지만 35분 제한으로 실행 단계가 취소됐다. 승인받은 변경은 러너 CPU 한 종류만 빌드하고 45분을 허용하는 실행 설정이다. Swift 테스트와 설치·실행 확인 항목은 유지했다. [Xcode 빌드 설정 안내](https://developer.apple.com/documentation/xcode/build-settings-reference)
+## 초기 연결이 끊긴 경우
+
+기존 APK는 저장된 테스트 세션의 연결을 확인하는 중에 Store가 필요한 재시도 버튼을 렌더링해 예외가 발생했다. 수정 APK에서 QA API 연결을 끊은 채 실행하고 재시도 버튼을 눌렀다. 앱 프로세스가 유지됐고, 재시도 실패 메시지도 표시됐다. 연결을 복원하고 앱을 다시 열자 선택한 놀이방이 유지됐다. [실제 재시도 화면](native/android-startup-recovery.png)
+
+iOS의 [실패 실행](https://github.com/tarobo22/taro/actions/runs/42337300637)에서 같은 예외가 확인됐다. [수정 커밋의 시뮬레이터 실행](https://github.com/tarobo22/taro/actions/runs/42340677998)에서 재검증 중이다. Swift 규칙 테스트는 유지했고, 실행 후 PID와 설치된 실행 파일을 대조하도록 승인받은 CI 설정을 적용했다.
