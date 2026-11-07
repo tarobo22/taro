@@ -81,11 +81,25 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Check current main revision
+        id: revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" = "$GITHUB_SHA" ]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'Newer main revision detected. This superseded APK was not published.' >> "$GITHUB_STEP_SUMMARY"
+          fi
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7
+        if: steps.revision.outputs.current == 'true'
         with:
           name: android-candidate
           path: candidate
       - name: Sign and verify the demo APK
+        if: steps.revision.outputs.current == 'true'
         env:
           KEYSTORE_B64: ${{ secrets.YEOUN_ANDROID_KEYSTORE_B64 }}
           STORE_PASSWORD: ${{ secrets.YEOUN_ANDROID_STORE_PASSWORD }}
@@ -104,13 +118,31 @@ jobs:
           "$signer" verify --verbose --print-certs release/yeoun-demo.apk > release/signature.txt
           (cd release && sha256sum yeoun-demo.apk > SHA256SUMS)
       - name: Publish verified APK
+        if: steps.revision.outputs.current == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
         run: |
           tag="android-${GITHUB_SHA}-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" != "$GITHUB_SHA" ]; then
+            echo 'Newer main revision detected. This superseded APK was not published.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           printf 'Demo API: https://yeoun-43-201-209-249.sslip.io/api\nCommit: %s\nARM64 / x86_64. Dedicated demo signing certificate. Not a Play Store release.\n' "$GITHUB_SHA" > release/notes.md
-          gh release create "$tag" release/yeoun-demo.apk release/SHA256SUMS release/signature.txt \
-            --target "$GITHUB_SHA" --title "Yeoun Android demo ${GITHUB_SHA:0:7}" --notes-file release/notes.md --draft
+          if ! gh release create "$tag" release/yeoun-demo.apk release/SHA256SUMS release/signature.txt \
+            --target "$GITHUB_SHA" --title "Yeoun Android demo ${GITHUB_SHA:0:7}" --notes-file release/notes.md --draft; then
+            current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
+            if [ "$current" != "$GITHUB_SHA" ]; then
+              echo 'Newer main revision detected during upload. APK was not published.' >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+            exit 1
+          fi
+          current=$(gh api "repos/$GH_REPO/git/ref/heads/main" --jq .object.sha)
+          if [ "$current" != "$GITHUB_SHA" ]; then
+            echo 'Newer main revision detected. APK remains a draft.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           gh release edit "$tag" --draft=false --latest
           printf '### Android demo\n[Download signed APK](https://github.com/%s/releases/download/%s/yeoun-demo.apk)\n' "$GH_REPO" "$tag" >> "$GITHUB_STEP_SUMMARY"
