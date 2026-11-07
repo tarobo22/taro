@@ -1,0 +1,85 @@
+✖ broken saved settings keep a usable default without resetting unrelated preferences (0.6206ms)
+✖ late hydration never replaces a choice the user has already made (0.1574ms)
+✖ rapid selections persist in order and end with the latest visible skin (1.3318ms)
+✖ failed persistence preserves the visible choice and can be explicitly retried (0.1108ms)
+✖ unknown skin IDs cannot publish an invalid asset choice or write storage (0.0914ms)
+ℹ Error: Test "late hydration never replaces a choice the user has already made" at tests\skin-selection.test.ts:2:1636 generated asynchronous activity after the test ended. This activity created the error "Error: S01 hydration" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "rapid selections persist in order and end with the latest visible skin" at tests\skin-selection.test.ts:2:2202 generated asynchronous activity after the test ended. This activity created the error "Error: S01 selection" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "rapid selections persist in order and end with the latest visible skin" at tests\skin-selection.test.ts:2:2202 generated asynchronous activity after the test ended. This activity created the error "Error: S01 selection" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 349.1772
+
+✖ failing tests:
+
+test at tests\skin-selection.test.ts:2:1167
+✖ broken saved settings keep a usable default without resetting unrelated preferences (0.6206ms)
+  Error: S01 hydration
+      at SkinSelectionStore.load (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\src\features\skins\SkinSelection.ts:9:35)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\tests\skin-selection.test.ts:9:14)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.start (node:internal/test_runner/test:1262:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+
+test at tests\skin-selection.test.ts:2:1636
+✖ late hydration never replaces a choice the user has already made (0.1574ms)
+  Error: S01 selection
+      at SkinSelectionStore.select (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\src\features\skins\SkinSelection.ts:10:49)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\tests\skin-selection.test.ts:15:41)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at tests\skin-selection.test.ts:2:2202
+✖ rapid selections persist in order and end with the latest visible skin (1.3318ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  'cafe' !== 'playroom'
+  
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\tests\skin-selection.test.ts:24:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'cafe',
+    expected: 'playroom',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\skin-selection.test.ts:2:2867
+✖ failed persistence preserves the visible choice and can be explicitly retried (0.1108ms)
+  Error: S01 selection
+      at SkinSelectionStore.select (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\src\features\skins\SkinSelection.ts:10:49)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\tests\skin-selection.test.ts:30:27)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
+
+test at tests\skin-selection.test.ts:2:3451
+✖ unknown skin IDs cannot publish an invalid asset choice or write storage (0.0914ms)
+  Error: S01 selection
+      at SkinSelectionStore.select (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\src\features\skins\SkinSelection.ts:10:49)
+      at TestContext.<anonymous> (C:\Users\chang\Documents\ChatGPT\0915 2\output\yeoun-three-skins-20261107\mobile\tests\skin-selection.test.ts:36:27)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1402:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:974:18)
+      at Test.postRun (node:internal/test_runner/test:1542:19)
+      at Test.run (node:internal/test_runner/test:1467:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7)
