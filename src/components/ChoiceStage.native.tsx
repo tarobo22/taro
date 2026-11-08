@@ -6,7 +6,7 @@ import {scheduleOnRN} from 'react-native-worklets';
 import {feedback} from '../services/feedback';
 import {color} from '../design/tokens';
 import type {ChoiceStageProps} from './ChoiceStage.types';
-export function ChoiceStage({children,onChoice,disabled=false,reduced,label='대화 선택'}:ChoiceStageProps){
+export function ChoiceStage({children,onChoice,disabled=false,reduced,label='대화 선택',showButtons=true}:ChoiceStageProps){
  const width=Math.min(useWindowDimensions().width,430)-48,x=useSharedValue(0),enabled=useSharedValue(true),alive=useRef(true),lock=useRef(false),pending=useRef(false),[locked,setLocked]=useState(false),[hint,setHint]=useState(true);
  const latest=useRef({onChoice,disabled,reduced});latest.current={onChoice,disabled,reduced};
  useEffect(()=>{enabled.value=!disabled&&!locked;},[disabled,locked]);
@@ -30,9 +30,16 @@ export function ChoiceStage({children,onChoice,disabled=false,reduced,label='대
  const left=useAnimatedStyle(()=>({opacity:Math.min(.65,Math.max(0,-x.value/width*1.5))})),right=useAnimatedStyle(()=>({opacity:Math.min(.65,Math.max(0,x.value/width*1.5))}));
  return <View style={{gap:10}}>
   <View style={{position:'relative'}}><Animated.View pointerEvents="none" style={[{position:'absolute',inset:0,backgroundColor:color.pink,borderRadius:24},left]}/><Animated.View pointerEvents="none" style={[{position:'absolute',inset:0,backgroundColor:color.mintDeep,borderRadius:24},right]}/>
-   <GestureDetector gesture={gesture}><Animated.View testID="choice-profile" style={style}>{children}</Animated.View></GestureDetector>
+   <GestureDetector gesture={gesture}><Animated.View testID="choice-profile" style={style}
+    accessible={!showButtons&&!disabled?true:undefined} accessibilityRole={!showButtons&&!disabled?'adjustable':undefined}
+    accessibilityHint={!showButtons&&!disabled?'위로 올리면 예, 아래로 내리면 아니요.':undefined}
+    accessibilityActions={!showButtons&&!disabled?[{name:'decrement',label:'아니요'},{name:'increment',label:'예'}]:undefined}
+    onAccessibilityAction={showButtons?undefined:event=>{
+     const action=event.nativeEvent.actionName;
+     if(action==='increment'||action==='decrement')choose(action==='increment');
+    }}>{children}</Animated.View></GestureDetector>
   </View>
-  <View style={{flexDirection:'row',gap:8}}>{[false,true].map(yes=><Pressable key={String(yes)} accessibilityRole="button" accessibilityLabel={yes?'예 선택':'아니요 선택'} disabled={disabled||locked} onPress={()=>choose(yes)} style={{flex:1,minHeight:48,borderRadius:17,alignItems:'center',justifyContent:'center',backgroundColor:yes?color.mint:color.pink,opacity:disabled||locked?.5:1}}><Text style={{fontSize:15,fontWeight:'600',color:color.ink}}>{yes?'예 →':'← 아니요'}</Text></Pressable>)}</View>
-  {hint&&!disabled?<Text style={{textAlign:'center',fontSize:11,color:color.muted}}>{label+' · 왼쪽 아니요, 오른쪽 예'}</Text>:null}
+  {showButtons?<View style={{flexDirection:'row',gap:8}}>{[false,true].map(yes=><Pressable key={String(yes)} accessibilityRole="button" accessibilityLabel={yes?'예 선택':'아니요 선택'} disabled={disabled||locked} onPress={()=>choose(yes)} style={{flex:1,minHeight:48,borderRadius:17,alignItems:'center',justifyContent:'center',backgroundColor:yes?color.mint:color.pink,opacity:disabled||locked?.5:1}}><Text style={{fontSize:15,fontWeight:'600',color:color.ink}}>{yes?'예 →':'← 아니요'}</Text></Pressable>)}</View>:null}
+  {(hint||!showButtons)&&!disabled?<Text style={{textAlign:'center',fontSize:showButtons?11:13,color:color.muted}}>{showButtons?label+' · 왼쪽 아니요, 오른쪽 예':'카드를 밀어 답해요. 왼쪽은 아니요, 오른쪽은 예.'}</Text>:null}
  </View>;
 }
