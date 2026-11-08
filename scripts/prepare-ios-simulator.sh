@@ -5,12 +5,12 @@ app="$1"
 proof="$2"
 mkdir -p "$proof"
 python3 - "$app/Info.plist" <<'PY'
-import plistlib, sys
+import os, plistlib, sys
 with open(sys.argv[1], 'rb') as stream:
     info = plistlib.load(stream)
 assert 'iPhoneSimulator' in info['CFBundleSupportedPlatforms'], 'Simulator build required'
 assert info['CFBundleIdentifier'] == 'com.yeoun.app', 'Unexpected app identifier'
-assert info['YeounAPIBaseURL'] == 'https://yeoun-43-201-209-249.sslip.io/api', 'Demo API missing from native Info.plist'
+assert info['YeounAPIBaseURL'] == os.environ['YEOUN_API_BASE_URL'], 'Demo API missing from native Info.plist'
 PY
 codesign --verify --strict "$app"
 python3 - "$app/Yeoun" "$proof/verified-entitlements.plist" <<'PY'

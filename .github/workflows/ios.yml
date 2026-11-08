@@ -17,6 +17,8 @@ jobs:
   simulator:
     runs-on: macos-15
     timeout-minutes: 45
+    env:
+      YEOUN_PUBLIC_URL: ${{ vars.YEOUN_PUBLIC_URL }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
@@ -41,7 +43,7 @@ jobs:
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath .local/ios-derived -jobs 3 CODE_SIGNING_ALLOWED=YES \
             CODE_SIGN_IDENTITY=- CODE_SIGNING_REQUIRED=NO CODE_SIGN_INJECT_BASE_ENTITLEMENTS=YES \
-            YEOUN_API_BASE_URL=https://yeoun-43-201-209-249.sslip.io/api \
+            YEOUN_API_BASE_URL="$YEOUN_API_BASE_URL" \
             ARCHS="$(uname -m)" ONLY_ACTIVE_ARCH=YES build \
             2>&1 | tee .local/ios-proof/build.log
       - name: Verify simulator identity and native API address

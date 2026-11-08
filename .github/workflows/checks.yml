@@ -34,6 +34,8 @@ jobs:
     needs: types-and-behavior
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    env:
+      YEOUN_PUBLIC_URL: ${{ vars.YEOUN_PUBLIC_URL }}
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
@@ -134,7 +136,7 @@ jobs:
             echo 'Newer main revision detected. This superseded APK was not published.' >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
-          printf 'Demo API: https://yeoun-43-201-209-249.sslip.io/api\nCommit: %s\nARM64 / x86_64. Dedicated demo signing certificate. Not a Play Store release.\n' "$GITHUB_SHA" > release/notes.md
+          printf 'Demo API: %s\nCommit: %s\nARM64 / x86_64. Dedicated demo signing certificate. Not a Play Store release.\n' "$YEOUN_API_BASE_URL" "$GITHUB_SHA" > release/notes.md
           if ! gh release create "$tag" release/yeoun-demo.apk release/SHA256SUMS release/signature.txt \
             --target "$GITHUB_SHA" --title "Yeoun Android demo ${GITHUB_SHA:0:7}" --notes-file release/notes.md --draft; then
             current=$(gh api "repos/$GH_REPO/compare/$GITHUB_SHA...main" --jq "$SOURCE_MATCH_QUERY")
